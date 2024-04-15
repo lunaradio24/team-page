@@ -31,7 +31,7 @@ const db = getFirestore(app);
 
 /************************   Create  ************************/
 // '멤버 추가' 버튼 클릭시
-$(document).on("click", "#savebtn", async function () {
+$(document).on("click", "#create-button", async function () {
   window.open(
     "newcard.html",
     "_blank",
@@ -89,9 +89,9 @@ async function readDB() {
               <div class="card-footer">
                 <small class="text-body-secondary">${mbti}</small>
               </div>
-              <div class="buttons" id="${doc.id}">
-                <button id="edit-button">수정</button>
-                <button id="delete-button">삭제</button>
+              <div class="mybuttons" id="${doc.id}">
+                <button id="edit-button" class="btn btn-dark">수정</button>
+                <button id="delete-button" class="btn btn-danger">삭제</button>
               </div>
             </div>
           </div>`;
@@ -108,7 +108,7 @@ $(document).on("click", "#member-image", function () {
 /************************   Update  ************************/
 // '수정' 버튼 클릭시
 $(document).on("click", "#edit-button", async function () {
-  //클릭된 버튼의 부모 요소, 즉 div class="buttons"에서 멤버의 ID를 가져옵니다.
+  //클릭된 버튼의 부모 요소, 즉 div class="mybuttons"에서 멤버의 ID를 가져옵니다.
   let docID = this.parentElement.id;
   //Firestore에서 해당 멤버의 데이터를 가져옵니다.
   let memberDoc = await getDoc(doc(db, "members", docID));

@@ -6,7 +6,6 @@
 }
 
 .mytitle {
-  /* background-color: green; */
   height: 250px;
   color: white;
 
@@ -31,13 +30,11 @@
 }
 
 .mycards {
-  /* background-color: green; */
   width: 1200px;
   margin: 30px auto 0px auto;
 }
 
 .mypostingbox {
-  /* background-color: green; */
   width: 500px;
   margin: 30px auto 0px auto;
   padding: 20px;
@@ -45,17 +42,19 @@
   border-radius: 5px;
 }
 
-.mybtn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+.card-footer {
+  text-align: center;
 }
 
-.mybtn > button {
-  margin: 5px;
+.mybuttons {
+  /* gap: 5px; */
 }
 
-#image {
-  width: 300px;
+.mybuttons > button {
+  /* margin: 5px; */
+}
+
+#member-image {
+  height: 200px;
+  object-fit: contain;
 }
