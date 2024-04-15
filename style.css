@@ -55,3 +55,7 @@
 .mybtn > button {
   margin: 5px;
 }
+
+#image {
+  width: 300px;
+}

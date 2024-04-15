@@ -43,20 +43,28 @@ $("#postingbtn").click(async function () {
   window.location.reload();
 });
 
-// 추억 저장하기 버튼 클릭시
-let ret;
+// '멤버 추가' 버튼 클릭시
+let popup_window;
 $("#savebtn").click(async function () {
-  ret = window.open(
+  popup_window = window.open(
     "a.html",
     "name_a",
-    "width=420,height=500,left=200,top=200"
+    "width=500,height=500,left=200,top=200"
   );
 });
 
+// 팝업창 '닫기' 버튼 클릭시
 $("#closebtn").click(async function () {
-  ret.close();
+  self.close();
 });
 
+$("#member-image").click(async function () {
+  //   window.open("member.html", "_blank", "width=500,height=500,left=200,top=200");
+  console.log("hi");
+  $(location).attr("href", "member.html");
+});
+
+// Read (데이터 불러오기)
 let docs = await getDocs(collection(db, "albums"));
 docs.forEach((doc) => {
   let row = doc.data();
@@ -73,6 +81,7 @@ docs.forEach((doc) => {
           src="${image}"
           class="card-img-top"
           alt="..."
+          id="member-image"
         />
         <div class="card-body">
           <h5 class="card-title">${title}</h5>
