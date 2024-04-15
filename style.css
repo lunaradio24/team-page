@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+* {
+  font-family: "Gowun Batang", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mytitle {
+  /* background-color: green; */
+  height: 250px;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://images.unsplash.com/photo-1511992243105-2992b3fd0410?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+  background-position: center;
+  background-size: cover;
+}
+
+.mytitle > button {
+  width: 150px;
+  height: 50px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.mycards {
+  /* background-color: green; */
+  width: 1200px;
+  margin: 30px auto 0px auto;
+}
+
+.mypostingbox {
+  /* background-color: green; */
+  width: 500px;
+  margin: 30px auto 0px auto;
+  padding: 20px;
+  box-shadow: 0px 0px 3px 0px blue;
+  border-radius: 5px;
+}
+
+.mybtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.mybtn > button {
+  margin: 5px;
+}
