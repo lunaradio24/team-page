@@ -2,79 +2,79 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 import {
-    collection,
-    addDoc,
-    getDoc,
-    getDocs,
-    updateDoc,
-    deleteDoc,
-    doc,
-    query,
-    orderBy,
-    Timestamp,
+  collection,
+  addDoc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+  Timestamp,
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
 // Firebase 구성 정보 설정
 const firebaseConfig = {
-    apiKey: "AIzaSyAv-qdHJTtM3PZleVXA8ZuVlGnHLYjcUJs",
-    authDomain: "teampage-3217c.firebaseapp.com",
-    projectId: "teampage-3217c",
-    storageBucket: "teampage-3217c.appspot.com",
-    messagingSenderId: "853950108531",
-    appId: "1:853950108531:web:0b70afd3d3d71addc2eb06",
-    measurementId: "G-B4741RFE19",
+  apiKey: "AIzaSyAv-qdHJTtM3PZleVXA8ZuVlGnHLYjcUJs",
+  authDomain: "teampage-3217c.firebaseapp.com",
+  projectId: "teampage-3217c",
+  storageBucket: "teampage-3217c.appspot.com",
+  messagingSenderId: "853950108531",
+  appId: "1:853950108531:web:0b70afd3d3d71addc2eb06",
+  measurementId: "G-B4741RFE19",
 };
 
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/*******   Create  *******/
-// 추가하기 버튼 클릭시
-$("#postingbtn").click(async function () {
-    let doc = {
-        image: $("#image").val(),
-        name: $("#name").val(),
-        introduce: $("#introduce").val(),
-        mbti: $("#mbti").val(),
-        time: Timestamp.now(),
-    };
-    await addDoc(collection(db, "members"), doc);
-    alert("저장 완료!");
-    self.close();
-    window.opener.location.reload();
-});
-
+/************************   Create  ************************/
 // '멤버 추가' 버튼 클릭시
-let popup_window;
-$("#savebtn").click(async function () {
-    popup_window = window.open(
-        "newcard.html",
-        "_blank",
-        "width=500,height=500,left=200,top=200"
-    );
+$(document).on("click", "#savebtn", async function () {
+  window.open(
+    "newcard.html",
+    "_blank",
+    "width=500,height=500,left=200,top=200"
+  );
+});
+// 팝업창 '추가' 버튼 클릭시
+$(document).on("click", "#add-button", async function () {
+  let doc = {
+    image: $("#image").val(),
+    name: $("#name").val(),
+    introduce: $("#introduce").val(),
+    mbti: $("#mbti").val(),
+    time: Timestamp.now(),
+  };
+  await addDoc(collection(db, "members"), doc);
+  alert("저장 완료!");
+  self.close();
+  window.opener.location.reload();
 });
 
 // 팝업창 '닫기' 버튼 클릭시
-$("#closebtn").click(async function () {
-    self.close();
+$(document).on("click", "#close-button", async function () {
+  //팝업창을 닫습니다.
+  self.close();
 });
 
-/*******   Read  *******/
+/************************   Read  ************************/
 let docs = await getDocs(
-    //시간순 정렬해서 query로 불러오기
-    query(collection(db, "members"), orderBy("time"))
+  //시간순 정렬해서 query로 불러오기
+  query(collection(db, "members"), orderBy("time"))
 );
 
 async function readDB() {
-    docs.forEach((doc) => {
-        let row = doc.data();
-        let image = row["image"];
-        let name = row["name"];
-        let introduce = row["introduce"];
-        let mbti = row["mbti"];
+  docs.forEach((doc) => {
+    let row = doc.data();
+    let image = row["image"];
+    let name = row["name"];
+    let introduce = row["introduce"];
+    let mbti = row["mbti"];
 
-        let temp_html = `
+    //불러올 멤버카드 템플릿
+    let temp_html = `
           <div class="col">
             <div class="card h-100">
               <img
@@ -90,59 +90,84 @@ async function readDB() {
                 <small class="text-body-secondary">${mbti}</small>
               </div>
               <div class="buttons" id="${doc.id}">
-                <button class="editBtn">Edit</button>
-                <button class="delBtn">Delete</button>
+                <button id="edit-button">수정</button>
+                <button id="delete-button">삭제</button>
               </div>
             </div>
           </div>`;
-        $("#card").append(temp_html);
-    });
+    //카드 목록에 추가
+    $("#card").append(temp_html);
+  });
 }
-
-/*******   Initiate  *******/
-function readyDoc() {
-    if (document.readyState !== "loading") {
-        //read saved data
-        readDB();
-    } else {
-        document.addEventListener("DOMContentLoaded");
-    }
-}
-readyDoc();
 
 // 이미지 클릭시 새창으로 개인 페이지 열기
 $(document).on("click", "#member-image", function () {
-    window.open("member.html", "_blank", "width=500,height=500,left=200,top=200");
+  window.open("member.html", "_blank", "width=500,height=500,left=200,top=200");
 });
 
-// Edit 버튼 클릭시
-$(document).on("click", ".editBtn", async function () {
-    let docID = this.parentElement.id;
-    let docData = doc(db, "members", docID);
-    let getData = await getDoc(docData);
+/************************   Update  ************************/
+// '수정' 버튼 클릭시
+$(document).on("click", "#edit-button", async function () {
+  //클릭된 버튼의 부모 요소, 즉 div class="buttons"에서 멤버의 ID를 가져옵니다.
+  let docID = this.parentElement.id;
+  //Firestore에서 해당 멤버의 데이터를 가져옵니다.
+  let memberDoc = await getDoc(doc(db, "members", docID));
+  let memberData = memberDoc.data();
 
-    let openWin = window.open(
-        "newcard.html",
-        "_blank",
-        "width=500,height=500,left=200,top=200"
-    );
-
-    console.log(openWin.document.getElementById("name"));
-    console.log(getData.data()["name"]);
-
-    openWin.onload = function () {
-        openWin.document.getElementById("image").value = getData.data()["image"];
-        openWin.document.getElementById("name").value = getData.data()["name"];
-        openWin.document.getElementById("introduce").value = getData.data()["introduce"];
-        openWin.document.getElementById("mbti").value = getData.data()["mbti"];
-    }
-
-
+  let openWin = window.open(
+    "newcard.html",
+    "_blank",
+    "width=500,height=500,left=200,top=200"
+  );
+  //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.
+  openWin.onload = function () {
+    openWin.document.getElementById("image").value = memberData["image"];
+    openWin.document.getElementById("name").value = memberData["name"];
+    openWin.document.getElementById("introduce").value =
+      memberData["introduce"];
+    openWin.document.getElementById("mbti").value = memberData["mbti"];
+    openWin.document.getElementById("add-button").textContent = "확인";
+    openWin.document.getElementById("add-button").value = docID;
+    openWin.document.getElementById("add-button").id = "confirm-button";
+  };
 });
 
-// Delete 버튼 클릭시
-$(document).on("click", ".delBtn", async function () {
-    let docID = this.parentElement.id;
-    await deleteDoc(doc(db, "members", docID));
-    window.location.reload();
+// '확인' 버튼 클릭시
+$(document).on("click", "#confirm-button", async function () {
+  // 클릭된 버튼의 value 값에서 멤버카드 데이터의 ID를 가져옵니다.
+  let docID = this.value;
+  // Firestore에서 해당 멤버의 데이터를 입력창에 적힌 값으로 업데이트 합니다.
+  await updateDoc(doc(db, "members", docID), {
+    image: $("#image").val(),
+    name: $("#name").val(),
+    introduce: $("#introduce").val(),
+    mbti: $("#mbti").val(),
+  });
+  alert("수정 완료!");
+  //팝업 창을 닫습니다.
+  self.close();
+  //메인 창을 새로고침 합니다.
+  window.opener.location.reload();
 });
+
+/************************   Delete  ************************/
+// '삭제' 버튼 클릭시
+$(document).on("click", "#delete-button", async function () {
+  let docID = this.parentElement.id;
+  await deleteDoc(doc(db, "members", docID));
+  window.location.reload();
+});
+
+/************************   Initiate  ************************/
+function initPage() {
+  //문서의 현재 상태가 로딩 중이 아니라면
+  if (document.readyState !== "loading") {
+    //바로 readDB 함수를 사용해 저장된 데이터를 불러와 웹페이지에 표시합니다.
+    readDB();
+  } else {
+    //로딩 중이라면 DOM 컨텐츠 로딩을 모두 완료한 후, readDB 함수를 실행합니다.
+    document.addEventListener("DOMContentLoaded", readDB);
+  }
+}
+// initPage 함수를 사용해 웹페이지가 새로고침 되었을 때
+initPage();
