@@ -61,8 +61,12 @@ $("#closebtn").click(async function () {
 });
 
 /*******   Read  *******/
-let docs = await getDocs(collection(db, "members"), orderBy("time"));
-async function readDocs() {
+let docs = await getDocs(
+  //시간순 정렬해서 query로 불러오기
+  query(collection(db, "members"), orderBy("time"))
+);
+
+async function readDB() {
   docs.forEach((doc) => {
     let row = doc.data();
     let image = row["image"];
@@ -71,11 +75,12 @@ async function readDocs() {
     let mbti = row["mbti"];
 
     let temp_html = `
-          <div class="col" id="member-image">
+          <div class="col">
             <div class="card h-100">
               <img
                 src="${image}"
                 class="card-img-top"
+                id="member-image"
               />
               <div class="card-body">
                 <h5 class="card-title">${name}</h5>
@@ -83,6 +88,10 @@ async function readDocs() {
               </div>
               <div class="card-footer">
                 <small class="text-body-secondary">${mbti}</small>
+              </div>
+              <div class="buttons" id="${doc.id}">
+                <button class="editBtn">Edit</button>
+                <button class="delBtn">Delete</button>
               </div>
             </div>
           </div>`;
@@ -94,13 +103,24 @@ async function readDocs() {
 function readyDoc() {
   if (document.readyState !== "loading") {
     //read saved data
-    readDocs();
+    readDB();
   } else {
     document.addEventListener("DOMContentLoaded");
   }
 }
 readyDoc();
 
+// 이미지 클릭시 새창으로 개인 페이지 열기
 $(document).on("click", "#member-image", function () {
   window.open("member.html", "_blank", "width=500,height=500,left=200,top=200");
+});
+
+// Edit 버튼 클릭시
+$(document).on("click", ".editBtn", async function () {});
+
+// Delete 버튼 클릭시
+$(document).on("click", ".delBtn", async function () {
+  let docID = this.parentElement.id;
+  await deleteDoc(doc(db, "members", docID));
+  window.location.reload();
 });
