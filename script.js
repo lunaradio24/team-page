@@ -116,7 +116,17 @@ $(document).on("click", "#member-image", function () {
 });
 
 // Edit 버튼 클릭시
-$(document).on("click", ".editBtn", async function () {});
+$(document).on("click", ".editBtn", async function () {
+  let docID = this.parentElement.id;
+
+  //   let doc = await getDoc(db, "members", docID);
+  let openWin = window.open(
+    "newcard.html",
+    "_blank",
+    "width=500,height=500,left=200,top=200"
+  );
+  openWin.document.getElementById("name").value = docID;
+});
 
 // Delete 버튼 클릭시
 $(document).on("click", ".delBtn", async function () {
