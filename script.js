@@ -70,6 +70,29 @@ $(document).on("click", "#close-button", async function () {
   self.close();
 });
 
+// teambtn을 클릭하면 새로운 이미지를 표시하도록 이벤트를 추가합니다.
+$(document).on("click", ".teambtn", function () {
+  // 기존의 멤버 카드를 삭제합니다.
+  $("#card").empty();
+
+  // 새 이미지의 URL 주소입니다.
+  let imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgsklthp1tSNy-mnv-r6mmcUcLaRe8eF05Hg&s";
+
+  // 새 이미지를 만듭니다.
+  let newImage = $("<img>");
+  newImage.attr("src", imageURL); // 이미지의 URL을 설정합니다.
+  newImage.attr("alt", "New Image");
+
+  // 새 이미지를 페이지에 추가합니다.
+  $("#card").append(newImage);
+});
+
+// memberbtn을 클릭하면 기존의 index.html 페이지로 이동하도록 이벤트를 추가합니다.
+$(document).on("click", ".memberbtn", function () {
+  window.location.href = "index.html";
+});
+
+
 /************************   Read  ************************/
 let docs = await getDocs(
   //시간순 정렬해서 query로 불러오기

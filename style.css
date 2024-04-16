@@ -62,3 +62,21 @@
   height: 200px;
   object-fit: contain;
 }
+
+.addImage {
+  width: 400px;
+  height: 300px;
+  background-color: lightgray;
+  border-radius: 20px 20px / 20px 20px;
+  overflow: hidden;
+  margin: 0px 10px 10px 0px;
+}
+
+.inputImg {
+  width: 450px;
+  height: 350px;
+}
+#card img {
+  width: 100%; 
+  height: auto; 
+}
