@@ -155,7 +155,7 @@ async function readDB() {
 
     //불러올 멤버카드 템플릿
     let temp_html = `
-          <div class="col">
+          <div class="col-card">
             <div class="card h-100">
               <img
                 src="${image}"
