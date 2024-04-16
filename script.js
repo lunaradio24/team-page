@@ -70,9 +70,19 @@ $(document).on("click", ".nav-link", function (event) {
   if (this.id != "join") {
     //기본 동작 방지
     event.preventDefault();
+    //로컬스토리지의 "menukey"라는 이름의 저장소에 현재 메뉴의 id를 저장
+    localStorage.setItem("menukey", this.id);
     //tabConent 함수에 클릭한 메뉴 넣어서 실행
     tabContent(this);
+  } else {
+    //do nothing
   }
+});
+$(document).on("click", ".mytitle", function () {
+  //로컬스토리지에 저장된 menukey 값을 "team"으로 초기화합니다.
+  localStorage.setItem("menukey", "team");
+  //페이지를 새로고침 합니다.
+  window.location.reload();
 });
 
 /************************   Create  ************************/
@@ -121,8 +131,8 @@ $(document).on("click", "#add-button", async function () {
     //입력한 멤버의 데이터를 Firestore에 저장합니다.
     await addDoc(collection(db, "members"), doc);
     alert("저장 완료!");
-    //로컬스토리지에 menukey라는 저장소를 만들고 "on"이라는 값을 저장합니다.
-    localStorage.setItem("menukey", "on");
+    //로컬스토리지에 menukey라는 저장소를 만들고 "members"이라는 값을 저장합니다.
+    localStorage.setItem("menukey", "members");
     //팝업창을 닫습니다.
     self.close();
     //메인창을 새로고침 합니다.
@@ -245,8 +255,6 @@ $(document).on("click", "#confirm-button", async function () {
       pw: $("#password").val(),
     });
     alert("수정 완료!");
-    //로컬스토리지에 menukey라는 저장소를 만들고 "on"이라는 값을 저장합니다.
-    localStorage.setItem("menukey", "on");
     //팝업 창을 닫습니다.
     self.close();
     //메인 창을 새로고침 합니다.
@@ -274,8 +282,6 @@ $(document).on("click", "#delete-button", async function () {
       // Firestore에서 해당 멤버의 데이터를 삭제합니다.
       await deleteDoc(doc(db, "members", docID));
       alert("삭제되었습니다.");
-      //로컬스토리지에 menukey라는 저장소를 만들고 "on"이라는 값을 저장합니다.
-      localStorage.setItem("menukey", "on");
       //메인 창을 새로고침 합니다.
       window.location.reload();
     } else {
@@ -300,18 +306,13 @@ function initPage() {
   }
   //로컬스토리지에서 "menukey" 값을 가져옵니다.
   let menukey = localStorage.getItem("menukey");
-  //로컬스토리지에서 가져온 menukey 값이 "on" 이면
-  if (menukey == "on") {
-    //'members' 메뉴탭을 엽니다.
-    let membersElement = document.getElementById("members");
+  //menukey 값이 null이 아니라면
+  if (menukey != null) {
+    //로컬스토리지에서 가져온 menukey 값에 따라 어떤 메뉴탭을 열지 결정합니다.
+    let membersElement = document.getElementById(menukey);
     tabContent(membersElement);
-    //로컬스토리지의 menukey 값을 "off"로 바꿔놓습니다.
-    localStorage.setItem("menukey", "off");
   } else {
-    //로컬스토리지에서 가져온 menukey 값이 "on"이 아니라면
-    //'team' 메뉴탭을 엽니다.
-    let teamElement = document.getElementById("team");
-    tabContent(teamElement);
+    //do nothing
   }
 }
 // initPage 함수를 사용해 웹페이지가 새로고침 되었을 때

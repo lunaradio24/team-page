@@ -18,6 +18,13 @@
   margin-top: 0px;
   padding-bottom: 30px;
 }
+.mytitle:hover {
+  cursor: pointer;
+}
+
+.nav {
+  gap: 80px;
+}
 
 #membersContent {
   width: 1200px;
