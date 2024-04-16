@@ -42,6 +42,10 @@
   border-radius: 5px;
 }
 
+.mynewcard .form-floating input::placeholder {
+  color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
+}
+
 .card-footer {
   text-align: center;
 }
