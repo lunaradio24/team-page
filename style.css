@@ -50,15 +50,35 @@
   text-align: center;
 }
 
-.mybuttons {
-  /* gap: 5px; */
-}
-
-.mybuttons > button {
-  /* margin: 5px; */
-}
-
 #member-image {
   height: 200px;
   object-fit: contain;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.wrapper {
+  text-align: center;
+  flex-grow: 1;
+
+  .image-box {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    margin: 20px auto;
+  }
+
+  .upload-btn {
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    display: inline-block;
+    cursor: pointer;
+
+    input[type="file"] {
+      display: none;
+    }
+  }
 }
