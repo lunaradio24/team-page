@@ -34,7 +34,7 @@ const db = getFirestore(app);
 $(document).on("click", "#create-button", async function () {
   window.open(
     "newcard.html",
-    "_blank",
+    "newCard",
     "width=500,height=500,left=200,top=200"
   );
 });
@@ -102,7 +102,7 @@ async function readDB() {
 
 // 이미지 클릭시 새창으로 개인 페이지 열기
 $(document).on("click", "#member-image", function () {
-  window.open("member.html", "_blank", "width=500,height=500,left=200,top=200");
+  window.open("member.html", "member-image", "width=500,height=500,left=200,top=200");
 });
 
 /************************   Update  ************************/
@@ -116,7 +116,7 @@ $(document).on("click", "#edit-button", async function () {
 
   let openWin = window.open(
     "newcard.html",
-    "_blank",
+    "updateCard",
     "width=500,height=500,left=200,top=200"
   );
   //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.
