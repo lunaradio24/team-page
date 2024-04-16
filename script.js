@@ -199,8 +199,7 @@ $(document).on("click", "#edit-button", async function () {
       );
       //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.
       openWin.onload = function () {
-        const reader = new FileReader();
-        openWin.document.querySelector(".image-box").src = memberData["image"];
+        openWin.document.getElementById("image-box").src = memberData["image"];
         openWin.document.getElementById("name").value = memberData["name"];
         openWin.document.getElementById("introduce").value =
           memberData["introduce"];
