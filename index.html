@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Team 밤양갱</title>
     <!-- CSS: style.css -->
     <link href="style.css" rel="stylesheet" />
@@ -17,23 +18,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- JS: script.js -->
     <script src="script.js" type="module"></script>
+    <!--메인화면 버튼 추가-->
+
+    <div>
+      <div class="sns-icons">
+        <button id="naver"></button>
+        <button id="github"></button>
+        <button id="notion"></button>
+        <button id="google"></button>
+      </div>
+      <h1 class="mytitle">밤양갱</h1>
+    </div>
+    <!-- navs & tabs -->
   </head>
   <body>
-    <div class="mytitle">
-      <h1>Team Page</h1>
-      <button id="create-button">멤버 추가</button>
-      <!--메인화면 버튼 추가-->
-      <div class="container">
-        <header class="d-flex justify-content-center py-3">
-          <ul class="nav nav-pills">
-            <li class="teambtn"><a href="#" class="nav-link active" aria-current="page">Team</a></li>
-            <li class="memberbtn"><a href="#" class="nav-link">Members</a></li>
-            <li class="joinbtn"><a href="#" class="nav-link">Join</a></li>
-            <li class="newsbtn"><a href="#" class="nav-link">News</a></li>
-          </ul>
-        </header>
+    <header class="d-flex justify-content-center py-3">
+      <!-- navs & tabs -->
+      <div class="navs">
+        <ul class="nav">
+          <li class="nav-item" id="team">
+            <a class="nav-link active" aria-current="page" href="#">Team</a>
+          </li>
+          <li class="nav-item" id="members">
+            <a class="nav-link" href="#">Members</a>
+          </li>
+          <li class="nav-item" id="join">
+            <a class="nav-link" href="#" id="create-button">Join</a>
+          </li>
+          <li class="nav-item" id="news">
+            <a class="nav-link" href="#">News</a>
+          </li>
+        </ul>
       </div>
-    </div>
+    </header>
     <div class="mycards">
       <div class="row row-cols-1 row-cols-md-5 g-4" id="card"></div>
     </div>

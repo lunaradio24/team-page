@@ -6,27 +6,17 @@
 }
 
 .mytitle {
-  height: 250px;
-  color: white;
-
+  height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  background-image: url("https://images.unsplash.com/photo-1511992243105-2992b3fd0410?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+  /* 밤양갱이미지 */
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgsklthp1tSNy-mnv-r6mmcUcLaRe8eF05Hg&s"); */
   background-position: center;
-  background-size: cover;
-}
-
-.mytitle > button {
-  width: 150px;
-  height: 50px;
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
-  border-radius: 5px;
-  margin-top: 20px;
+  background-size: contain;
+  margin-top: 0px;
+  padding-bottom: 30px;
 }
 
 .mycards {
@@ -36,8 +26,8 @@
 
 .mynewcard {
   width: 500px;
-  margin: 30px auto 0px auto;
-  padding: 20px;
+  margin: 10px auto 0px auto;
+  padding: 10px;
   box-shadow: 0px 0px 3px 0px blue;
   border-radius: 5px;
 }
@@ -55,7 +45,6 @@
   object-fit: contain;
 }
 
-<<<<<<< HEAD
 .addImage {
   width: 400px;
   height: 300px;
@@ -69,11 +58,7 @@
   width: 450px;
   height: 350px;
 }
-#card img {
-  width: 100%; 
-  height: auto; 
-}
-=======
+
 .flex-container {
   display: flex;
 }
@@ -101,4 +86,55 @@
     }
   }
 }
->>>>>>> 2f0be1fb4a0ec1cf65fa238f16724c47d20a4238
+
+body > header {
+  background-color: rgb(203, 203, 248);
+}
+
+.sns-icons {
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  justify-content: right;
+  gap: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+#naver {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb-aiB9jbgLyrCyqd23-Mbp4ebdqLauh3a_TIfsFCaZA&s");
+  background-size: contain;
+}
+#github {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
+  background-size: contain;
+}
+#notion {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png");
+  background-size: contain;
+}
+#google {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png");
+  background-size: contain;
+}
+#card {
+  width: 100%;
+  height: auto;
+}

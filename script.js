@@ -29,13 +29,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+/************************   Icons  ************************/
+$(document).on("click", "#naver", () => {
+  window.location.href = "https://naver.com";
+});
+$(document).on("click", "#github", () => {
+  window.location.href = "https://github.com";
+});
+$(document).on("click", "#notion", () => {
+  window.location.href = "https://notion.so";
+});
+$(document).on("click", "#google", () => {
+  window.location.href = "https://google.com";
+});
+
 /************************   Create  ************************/
 // '멤버 추가' 버튼 클릭시
 $(document).on("click", "#create-button", async function () {
   window.open(
     "newcard.html",
     "newCard",
-    "width=500,height=500,left=200,top=200"
+    "width=520,height=670,left=200,top=100"
   );
 });
 
@@ -97,7 +111,8 @@ $(document).on("click", ".teambtn", function () {
   $("#card").empty();
 
   // 새 이미지의 URL 주소입니다.
-  let imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgsklthp1tSNy-mnv-r6mmcUcLaRe8eF05Hg&s";
+  let imageURL =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgsklthp1tSNy-mnv-r6mmcUcLaRe8eF05Hg&s";
 
   // 새 이미지를 만듭니다.
   let newImage = $("<img>");
@@ -112,7 +127,6 @@ $(document).on("click", ".teambtn", function () {
 $(document).on("click", ".memberbtn", function () {
   window.location.href = "index.html";
 });
-
 
 /************************   Read  ************************/
 let docs = await getDocs(
@@ -181,7 +195,7 @@ $(document).on("click", "#edit-button", async function () {
       let openWin = window.open(
         "newcard.html",
         "updateCard",
-        "width=500,height=500,left=200,top=200"
+        "width=520,height=670,left=200,top=100"
       );
       //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.
       openWin.onload = function () {
