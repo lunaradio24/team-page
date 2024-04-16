@@ -21,8 +21,20 @@
   <body>
     <div class="mynewcard">
       <div class="form-floating mb-3">
+<<<<<<< HEAD
         <input type="file" class="form-control" id="image" accept="image/*" /> <!--inputtype 파일로수정-->
         <label for="floatingInput"></label>
+=======
+        <div class="flex-container">
+          <div class="wrapper">
+            <img class="image-box" id="image-box" />
+            <label for="file" class="upload-btn">
+              <input id="file" type="file" accept="image/*" />
+              <span>Upload Image</span>
+            </label>
+          </div>
+        </div>
+>>>>>>> 2f0be1fb4a0ec1cf65fa238f16724c47d20a4238
       </div>
       <div class="form-floating mb-3">
         <input class="form-control" id="name" placeholder="이름" />
@@ -41,7 +53,13 @@
         <label for="floatingInput"></label>
       </div>
       <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" placeholder="password" maxlength="4" />
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="password"
+          maxlength="4"
+        />
         <label for="floatingInput"></label>
       </div>
       <div class="buttons">

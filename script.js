@@ -38,13 +38,34 @@ $(document).on("click", "#create-button", async function () {
     "width=500,height=500,left=200,top=200"
   );
 });
+
+let fileDOM = document.querySelector("#file");
+let preview = document.querySelector("#image-box");
+
+// 이미지 파일 업로드 함수
+function getImage() {
+  const reader = new FileReader();
+  //FileReader가 파일 읽기를 완료(onload)하면,
+  reader.onload = ({ target }) => {
+    //읽어들인 파일의 데이터 url을 preview의 src 속성에 넣어줍니다.
+    preview.src = target.result;
+  };
+  //업로드한 이미지 파일의 url을 읽습니다.
+  reader.readAsDataURL(fileDOM.files[0]);
+}
+// 'Upload image' 버튼 클릭하여 새 파일을 선택하면
+fileDOM?.addEventListener("change", function () {
+  //getImage 함수를 실행하여 선택한 이미지 파일의 데이터 url을 이미지 preview 요소의 src에 넣어줍니다.
+  getImage();
+});
+
 // 팝업창 '추가' 버튼 클릭시
 $(document).on("click", "#add-button", async function () {
   //비밀번호 입력란에 입력한 글자가 4자리 숫자인 경우
   if (/^\d{4}$/.test($("#password").val())) {
     //Firestore에 저장할 doc을 생성합니다.
     let doc = {
-      image: $("#image").val(),
+      image: $("#image-box").prop("src"),
       name: $("#name").val(),
       introduce: $("#introduce").val(),
       mbti: $("#mbti").val(),
@@ -164,7 +185,8 @@ $(document).on("click", "#edit-button", async function () {
       );
       //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.
       openWin.onload = function () {
-        openWin.document.getElementById("image").value = memberData["image"];
+        const reader = new FileReader();
+        openWin.document.querySelector(".image-box").src = memberData["image"];
         openWin.document.getElementById("name").value = memberData["name"];
         openWin.document.getElementById("introduce").value =
           memberData["introduce"];
@@ -192,7 +214,7 @@ $(document).on("click", "#confirm-button", async function () {
   if (/^\d{4}$/.test($("#password").val())) {
     // Firestore에서 해당 멤버의 데이터를 입력창에 적힌 값으로 업데이트 합니다.
     await updateDoc(doc(db, "members", docID), {
-      image: $("#image").val(),
+      image: $("#image-box").prop("src"),
       name: $("#name").val(),
       introduce: $("#introduce").val(),
       mbti: $("#mbti").val(),
