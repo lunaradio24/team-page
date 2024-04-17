@@ -216,15 +216,15 @@ async function readDB() {
                       <label>Mbti</label>
                       <p>${mbti}</p>
                     </div>
-                    <div class="media">
+                    <div class="media txtarea">
                       <label>장점</label>
                       <p>${strength}</p>
                     </div>
-                    <div class="media">
+                    <div class="media txtarea">
                       <label>협업 스타일</label>
                       <p>${cowork}</p>
                     </div>
-                    <div class="media">
+                    <div class="media txtarea">
                       <label>좋아하는 것</label>
                       <p>${favorites}</p>
                     </div>
@@ -338,7 +338,6 @@ $(document).on("click", "#confirm-button", async function () {
       favorites: $("#favorites").val(),
       blog: $("#blog").val(),
       github: $("#github").val(),
-      time: Timestamp.now(),
       pw: $("#password").val(),
     });
     alert("수정 완료!");

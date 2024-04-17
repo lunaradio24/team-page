@@ -36,7 +36,11 @@
 .col-card:hover {
   transform: scale(1.2);
 }
-
+.card-img-top {
+  width: 200px;
+  height: 300px;
+  object-fit: contain;
+}
 .content {
   display: none;
 }
@@ -354,4 +358,8 @@ body > header {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.media .txtarea {
+  white-space: pre-wrap;
 }
