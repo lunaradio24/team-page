@@ -16,7 +16,6 @@
   <!-- JS: script.js -->
   <script src="script.js" type="module"></script>
   <!--메인화면 버튼 추가-->
-
   <div>
     <div class="sns-icons">
       <button id="naver-icon"></button>
@@ -24,36 +23,56 @@
       <button id="notion-icon"></button>
       <button id="google-icon"></button>
     </div>
+  </div>
+  <div>
     <h1 class="mytitle">밤양갱</h1>
   </div>
-  <!-- navs & tabs -->
 </head>
-
 <body>
-  <header class="d-flex justify-content-center py-3">
-    <!-- navs & tabs -->
-    <div class="navs">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" id="team" href="#">Team</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="members" href="#">Members</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="join">Join</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="news" href="#">News</a>
-        </li>
-      </ul>
-    </div>
-  </header>
-  <div id="home"></div>
-  <div class="content" id="teamContent">
-    <p>Team</p>
-  </div>
-
+    <header class="d-flex justify-content-center py-3">
+      <!-- navs & tabs -->
+      <div class="navs">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" id="team" href="#"
+              >Team</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="members" href="#">Members</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="join">Join</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="news" href="#">News</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="content" id="teamContent">
+      <!--사진+메시지박스추가-->
+      <div class="infoTeamWrap">
+        <div class="gatherImg">
+          <img src="./images/조사진.png" alt="게더타운 캡쳐" />
+        </div>
+        <div class="teamAndDonaBox">
+          <div class="infoTeam">
+            <div class="content1">
+              <p class="intro">안녕하세요</p>
+              <p class="introContent">🌰밤양갱조🌰 입니다!!</p>
+            </div>
+            <div class="content1">
+              <p class="intro">저희는</p>
+              <p class="introContent">조용하고 어색합니다</p>
+            </div>
+            <div class="content1">
+              <p class="intro">목표는</p>
+              <p class="introContent">내배캠 완주후에 3달이내 취업입니다</p>
+            </div>
+          </div>
+        </div>
+      </div>
   <div class="content" id="membersContent">
     <div class="row row-cols-1 row-cols-md-5 g-4" id="card"></div>
   </div>
