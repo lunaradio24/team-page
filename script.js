@@ -195,6 +195,10 @@ async function readDB() {
     //카드 목록에 추가
     $("#card").append(card_html);
 
+    let strengthStr = strength.replace(/\n/g, "<br>");
+    let coworkStr = cowork.replace(/\n/g, "<br>");
+    let favoritesStr = favorites.replace(/\n/g, "<br>");
+
     //불러올 멤버 정보 템플릿
     let member_html = `
     <div class="modal" id="${doc.id}Modal">
@@ -215,15 +219,15 @@ async function readDB() {
                     </div>
                     <div class="media txtarea">
                       <label>장점</label>
-                      <p>${strength}</p>
+                      <p>${strengthStr}</p>
                     </div>
                     <div class="media txtarea">
                       <label>협업 스타일</label>
-                      <p>${cowork}</p>
+                      <p>${coworkStr}</p>
                     </div>
                     <div class="media txtarea">
                       <label>좋아하는 것</label>
-                      <p>${favorites}</p>
+                      <p>${favoritesStr}</p>
                     </div>
                   </div>
                   <div class="memberEditButtons" id="${doc.id}">

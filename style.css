@@ -344,6 +344,7 @@ body > header {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
+  min-height: 320px;
   width: 80%;
 }
 
