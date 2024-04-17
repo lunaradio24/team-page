@@ -130,6 +130,7 @@ body > header {
   height: 30px;
   border-radius: 50%;
   border: none;
+  background-color: white;
   background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb-aiB9jbgLyrCyqd23-Mbp4ebdqLauh3a_TIfsFCaZA&s");
   background-size: contain;
 }
@@ -138,7 +139,8 @@ body > header {
   height: 30px;
   border-radius: 50%;
   border: none;
-  background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
+  background-color: white;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1920px-GitHub_Invertocat_Logo.svg.png");
   background-size: contain;
 }
 #notion-icon {
@@ -146,7 +148,8 @@ body > header {
   height: 30px;
   border-radius: 50%;
   border: none;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png");
+  background-color: white;
+  background-image: url("https://seekicon.com/free-icon-download/notion_1.svg");
   background-size: contain;
 }
 #google-icon {
@@ -154,6 +157,7 @@ body > header {
   height: 30px;
   border-radius: 50%;
   border: none;
+  background-color: white;
   background-image: url("https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png");
   background-size: contain;
 }
@@ -243,7 +247,8 @@ body > header {
   height: 30px;
   border-radius: 50%;
   border: none;
-  background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
+  background-color: white;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1920px-GitHub_Invertocat_Logo.svg.png");
   background-size: contain;
 }
 #member-blog-icon {
@@ -251,7 +256,8 @@ body > header {
   height: 30px;
   border-radius: 50%;
   border: none;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png");
+  background-color: white;
+  background-image: url("https://w7.pngwing.com/pngs/254/281/png-transparent-social-media-blogger-computer-icons-logo-blog-text-logo-social-media.png");
   background-size: contain;
 }
 
@@ -340,7 +346,7 @@ body > header {
 }
 
 .container {
-  background-color: #fefefe;
+  background-color: white;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
