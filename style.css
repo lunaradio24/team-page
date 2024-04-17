@@ -11,8 +11,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* 밤양갱이미지 */
-  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgsklthp1tSNy-mnv-r6mmcUcLaRe8eF05Hg&s"); */
   background-position: center;
   background-size: contain;
   margin-top: 0px;
@@ -54,7 +52,9 @@
 .mynewcard .form-floating input::placeholder {
   color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
 }
-
+.mynewcard .form-floating textarea::placeholder {
+  color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
+}
 .card-footer {
   text-align: center;
 }
@@ -121,7 +121,7 @@ body > header {
   margin-right: 10px;
   margin-bottom: 0px;
 }
-#naver {
+#naver-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -129,7 +129,7 @@ body > header {
   background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb-aiB9jbgLyrCyqd23-Mbp4ebdqLauh3a_TIfsFCaZA&s");
   background-size: contain;
 }
-#github {
+#github-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -137,7 +137,7 @@ body > header {
   background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
   background-size: contain;
 }
-#notion {
+#notion-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -145,7 +145,7 @@ body > header {
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png");
   background-size: contain;
 }
-#google {
+#google-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -191,6 +191,28 @@ body > header {
   align-items: center;
   justify-content: center;
 }
+.memberBody{
+  color: #6F8BA4;
+  margin-top:20px;
+}
+
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.memberImg {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+}
+#memberImgGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .intro {
   font-weight: 900;
   font-size: 50px;
@@ -202,4 +224,134 @@ body > header {
 }
 .content1 {
   padding: 5px 0px 0px 0%;
+}
+
+.member-sns-icon-group {
+  position: absolute;
+  right: 200px;
+  bottom: -40px;
+}
+
+#member-github-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
+  background-size: contain;
+}
+#member-blog-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png");
+  background-size: contain;
+}
+
+/* About Me 
+---------------------*/
+.about-text h3 {
+  font-size: 45px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+@media (max-width: 767px) {
+  .about-text h3 {
+    font-size: 35px;
+  }
+}
+.about-text h6 {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+@media (max-width: 767px) {
+  .about-text h6 {
+    font-size: 18px;
+  }
+}
+.about-text p {
+  font-size: 18px;
+  max-width: 450px;
+}
+.about-text p mark {
+  font-weight: 600;
+  color: #20247b;
+}
+
+.about-list {
+  padding-top: 10px;
+}
+.about-list .media {
+  padding: 5px 0;
+}
+.about-list label {
+  color: #20247b;
+  font-weight: 600;
+  width: 100px;
+  margin: 0;
+  position: relative;
+}
+.about-list label:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 11px;
+  width: 1px;
+  height: 12px;
+  background: #20247b;
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+  margin: auto;
+  opacity: 0.5;
+}
+.about-list p {
+  margin: 0;
+  font-size: 15px;
+}
+
+@media (max-width: 1000px) {
+  .about-avatar {
+    margin-top: 30px;
+  }
+}
+
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* 부모 화면 회색 처리 */
+}
+
+.container {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* 모달창에서 닫기 버튼 생성 필요 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
