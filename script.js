@@ -43,6 +43,13 @@ $(document).on("click", "#google-icon", () => {
   window.location.href = "https://google.com";
 });
 
+$(document).on("click", "#member-github-icon", (element) => {
+  window.location.href = element.target.className;
+});
+$(document).on("click", "#member-blog-icon", (element) => {
+  window.location.href = element.target.className;
+});
+
 /************************   NavBars  ************************/
 // 메뉴 클릭했을 때 보여지는 컨텐츠 화면 전환하는 함수
 function tabContent(element) {
@@ -123,8 +130,12 @@ $(document).on("click", "#add-button", async function () {
     let doc = {
       image: $("#image-box").prop("src"),
       name: $("#name").val(),
-      introduce: $("#introduce").val(),
       mbti: $("#mbti").val(),
+      strength: $("#strength").val(),
+      cowork: $("#cowork").val(),
+      favorites: $("#favorites").val(),
+      blog: $("#blog").val(),
+      github: $("#github").val(),
       time: Timestamp.now(),
       pw: $("#password").val(),
     };
@@ -160,11 +171,15 @@ async function readDB() {
     let row = doc.data();
     let image = row["image"];
     let name = row["name"];
-    let introduce = row["introduce"];
     let mbti = row["mbti"];
+    let strength = row["strength"];
+    let cowork = row["cowork"];
+    let favorites = row["favorites"];
+    let blog = row["blog"];
+    let github = row["github"];
 
     //불러올 멤버카드 템플릿
-    let temp_html = `
+    let card_html = `
           <div class="col-card">
             <div class="card h-100">
               <img
@@ -174,53 +189,95 @@ async function readDB() {
               />
               <div class="card-body">
                 <h5 class="card-title">${name}</h5>
-                <p class="card-text">${introduce}</p>
               </div>
               <div class="card-footer">
                 <small class="text-body-secondary">${mbti}</small>
               </div>
-              <div class="mybuttons" id="${doc.id}">
-                <button id="edit-button" class="btn btn-dark">수정</button>
-                <button id="delete-button" class="btn btn-danger">삭제</button>
-              </div>
             </div>
           </div>`;
     //카드 목록에 추가
-    $("#card").append(temp_html);
+    $("#card").append(card_html);
+
+    //불러올 멤버 정보 템플릿
+    let member_html = `
+    <div class="modal" id="${doc.id}Modal">
+      <section class="memberBody" id="about">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6">
+              <div class="about-text go-to">
+                <div class="row about-list">
+                  <div class="col-md-6">
+                    <div class="media">
+                      <label>이름</label>
+                      <p>${name}</p>
+                    </div>
+                    <div class="media">
+                      <label>Mbti</label>
+                      <p>${mbti}</p>
+                    </div>
+                    <div class="media">
+                      <label>장점</label>
+                      <p>${strength}</p>
+                    </div>
+                    <div class="media">
+                      <label>협업 스타일</label>
+                      <p>${cowork}</p>
+                    </div>
+                    <div class="media">
+                      <label>좋아하는 것</label>
+                      <p>${favorites}</p>
+                    </div>
+                  </div>
+                  <div class="memberEditButtons" id="${doc.id}">
+                    <button id="edit-button" class="btn btn-dark">수정</button>
+                    <button id="delete-button" class="btn btn-danger">삭제</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6" id="memberImgGroup">
+              <div class="about-avatar">
+                <img class="memberImg" src="${image}">
+                <div class="member-sns-icon-group">
+                  <button class="${github}" id="member-github-icon"></button>
+                  <button class="${blog}" id="member-blog-icon"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    `
+    //modalGroup 목록에 추가
+    $("#modalGroup").append(member_html);
   });
 }
 
 // 이미지 클릭시 새창으로 개인 페이지 열기
 $(document).on("click", ".card-img-top", async function () {
-  //클릭된 이미지의 형제 요소, 즉 div class="mybuttons"에서 멤버의 ID를 가져옵니다.
-  let docID = this.id;
-  //Firestore에서 해당 멤버의 데이터를 가져옵니다.
-  let memberDoc = await getDoc(doc(db, "members", docID));
-  let memberData = memberDoc.data();
+  $("#" + this.id + "Modal").css("display", "block");
+  sessionStorage.setItem("modalID", "#" + this.id + "Modal");
+});
 
-  let memberWin = window.open(
-    "member.html",
-    "_blank",
-    "width=1000,height=600,left=200,top=200"
-  );
+// 모달 닫기 버튼 및 모달 외부 클릭 시 이벤트 처리
+$(".close").click(function () {
+  $(sessionStorage.getItem("modalID")).css("display", "none");
+  sessionStorage.removeItem("modalID");
+});
 
-  memberWin.onload = function () {
-    memberWin.document.getElementById("memberTitle").textContent = memberData["name"];
-    memberWin.document.getElementById("memberImg").src = memberData["image"];
-    memberWin.document.getElementById("memberName").value = memberData["name"];
-    memberWin.document.getElementById("memberMbti").value = memberData["mbti"];
-    memberWin.document.getElementById("memberStrength").value = memberData["strength"];
-    memberWin.document.getElementById("memberCowork").value = memberData["cowork"];
-    memberWin.document.getElementById("memberFavorites").value = memberData["favorites"];
-    memberWin.document.getElementById("memberBlog").value = memberData["blog"];
-    memberWin.document.getElementById("memberGithub").value = memberData["github"];
-  };
+$(window).click(function (event) {
+  if (event.target == $(sessionStorage.getItem("modalID"))[0]) {
+    $(sessionStorage.getItem("modalID")).css("display", "none");
+    sessionStorage.removeItem("modalID");
+  }
 });
 
 /************************   Update  ************************/
 // '수정' 버튼 클릭시
 $(document).on("click", "#edit-button", async function () {
-  //클릭된 버튼의 부모 요소, 즉 div class="mybuttons"에서 멤버의 ID를 가져옵니다.
+  //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
   let docID = this.parentElement.id;
   //Firestore에서 해당 멤버의 데이터를 가져옵니다.
   let memberDoc = await getDoc(doc(db, "members", docID));
@@ -240,9 +297,12 @@ $(document).on("click", "#edit-button", async function () {
       openWin.onload = function () {
         openWin.document.getElementById("image-box").src = memberData["image"];
         openWin.document.getElementById("name").value = memberData["name"];
-        openWin.document.getElementById("introduce").value =
-          memberData["introduce"];
         openWin.document.getElementById("mbti").value = memberData["mbti"];
+        openWin.document.getElementById("blog").value = memberData["blog"];
+        openWin.document.getElementById("github").value = memberData["github"];
+        openWin.document.getElementById("strength").value = memberData["strength"];
+        openWin.document.getElementById("cowork").value = memberData["cowork"];
+        openWin.document.getElementById("favorites").value = memberData["favorites"];
         openWin.document.getElementById("password").value = memberData["pw"];
         openWin.document.getElementById("add-button").textContent = "확인";
         openWin.document.getElementById("add-button").value = docID;
@@ -252,6 +312,8 @@ $(document).on("click", "#edit-button", async function () {
       //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는지 않는 경우
       alert("비밀번호가 일치하지 않습니다.");
     }
+  } else if (inputPw == null) {
+    //프롬프트 취소했을 경우
   } else {
     //프롬프트에 입력한 글자가 4자리 숫자가 아닌 경우
     alert("4자리 숫자로 입력해주세요.");
@@ -268,8 +330,13 @@ $(document).on("click", "#confirm-button", async function () {
     await updateDoc(doc(db, "members", docID), {
       image: $("#image-box").prop("src"),
       name: $("#name").val(),
-      introduce: $("#introduce").val(),
       mbti: $("#mbti").val(),
+      strength: $("#strength").val(),
+      cowork: $("#cowork").val(),
+      favorites: $("#favorites").val(),
+      blog: $("#blog").val(),
+      github: $("#github").val(),
+      time: Timestamp.now(),
       pw: $("#password").val(),
     });
     alert("수정 완료!");
@@ -286,7 +353,7 @@ $(document).on("click", "#confirm-button", async function () {
 /************************   Delete  ************************/
 // '삭제' 버튼 클릭시
 $(document).on("click", "#delete-button", async function () {
-  //클릭된 버튼의 부모 요소, 즉 div class="mybuttons"에서 멤버의 ID를 가져옵니다.
+  //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
   let docID = this.parentElement.id;
   //Firestore에서 해당 멤버의 데이터를 가져옵니다.
   let memberDoc = await getDoc(doc(db, "members", docID));
@@ -306,6 +373,8 @@ $(document).on("click", "#delete-button", async function () {
       //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는지 않는 경우
       alert("비밀번호가 일치하지 않습니다.");
     }
+  } else if (inputPw == null) {
+    //프롬프트 취소했을 경우
   } else {
     //프롬프트에 입력한 글자가 4자리 숫자가 아닌 경우
     alert("4자리 숫자로 입력해주세요.");

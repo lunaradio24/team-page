@@ -171,14 +171,37 @@ body > header {
 }
 
 .memberImg {
-  max-width: 50%;
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
 }
-.memberImg {
+#memberImgGroup {
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(0%);
-  border-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.member-sns-icon-group {
+  position: absolute;
+  right: 200px;
+  bottom: -40px;
+}
+
+#member-github-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
+  background-size: contain;
+}
+#member-blog-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png");
+  background-size: contain;
 }
 
 /* About Me 
@@ -249,6 +272,47 @@ body > header {
 @media (max-width: 1000px) {
   .about-avatar {
     margin-top: 30px;
-    background-color: gray;
   }
+}
+
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* 부모 화면 회색 처리 */
+}
+
+.container {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* 모달창에서 닫기 버튼 생성 필요 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.memberEditButtons {
+  /* position: absolute; */
+  /* right: 0px; */
+  /* bottom: 0px; */
 }
