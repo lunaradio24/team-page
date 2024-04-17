@@ -30,16 +30,16 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 /************************   Icons  ************************/
-$(document).on("click", "#naver", () => {
+$(document).on("click", "#naver-icon", () => {
   window.location.href = "https://naver.com";
 });
-$(document).on("click", "#github", () => {
+$(document).on("click", "#github-icon", () => {
   window.location.href = "https://github.com";
 });
-$(document).on("click", "#notion", () => {
+$(document).on("click", "#notion-icon", () => {
   window.location.href = "https://notion.so";
 });
-$(document).on("click", "#google", () => {
+$(document).on("click", "#google-icon", () => {
   window.location.href = "https://google.com";
 });
 

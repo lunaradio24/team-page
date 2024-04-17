@@ -54,7 +54,9 @@
 .mynewcard .form-floating input::placeholder {
   color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
 }
-
+.mynewcard .form-floating textarea::placeholder {
+  color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
+}
 .card-footer {
   text-align: center;
 }
@@ -121,7 +123,7 @@ body > header {
   margin-right: 10px;
   margin-bottom: 0px;
 }
-#naver {
+#naver-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -129,7 +131,7 @@ body > header {
   background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb-aiB9jbgLyrCyqd23-Mbp4ebdqLauh3a_TIfsFCaZA&s");
   background-size: contain;
 }
-#github {
+#github-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -137,7 +139,7 @@ body > header {
   background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
   background-size: contain;
 }
-#notion {
+#notion-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -145,7 +147,7 @@ body > header {
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png");
   background-size: contain;
 }
-#google {
+#google-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
