@@ -158,8 +158,10 @@ body > header {
   background-size: contain;
 }
 #card {
-  width: 100%;
-  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .gatherImg {

@@ -187,11 +187,8 @@ async function readDB() {
                 class="card-img-top"
                 id="${doc.id}"
               />
-              <div class="card-body">
-                <h5 class="card-title">${name}</h5>
-              </div>
               <div class="card-footer">
-                <small class="text-body-secondary">${mbti}</small>
+                <small class="text-body-secondary">${name}</small>
               </div>
             </div>
           </div>`;
