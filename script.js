@@ -170,7 +170,7 @@ async function readDB() {
               <img
                 src="${image}"
                 class="card-img-top"
-                id="member-image"
+                id="${doc.id}"
               />
               <div class="card-body">
                 <h5 class="card-title">${name}</h5>
@@ -191,12 +191,30 @@ async function readDB() {
 }
 
 // 이미지 클릭시 새창으로 개인 페이지 열기
-$(document).on("click", "#member-image", function () {
-  window.open(
+$(document).on("click", ".card-img-top", async function () {
+  //클릭된 이미지의 형제 요소, 즉 div class="mybuttons"에서 멤버의 ID를 가져옵니다.
+  let docID = this.id;
+  //Firestore에서 해당 멤버의 데이터를 가져옵니다.
+  let memberDoc = await getDoc(doc(db, "members", docID));
+  let memberData = memberDoc.data();
+
+  let memberWin = window.open(
     "member.html",
-    "member-image",
-    "width=500,height=500,left=200,top=200"
+    "_blank",
+    "width=1000,height=600,left=200,top=200"
   );
+
+  memberWin.onload = function () {
+    memberWin.document.getElementById("memberTitle").textContent = memberData["name"];
+    memberWin.document.getElementById("memberImg").src = memberData["image"];
+    memberWin.document.getElementById("memberName").value = memberData["name"];
+    memberWin.document.getElementById("memberMbti").value = memberData["mbti"];
+    memberWin.document.getElementById("memberStrength").value = memberData["strength"];
+    memberWin.document.getElementById("memberCowork").value = memberData["cowork"];
+    memberWin.document.getElementById("memberFavorites").value = memberData["favorites"];
+    memberWin.document.getElementById("memberBlog").value = memberData["blog"];
+    memberWin.document.getElementById("memberGithub").value = memberData["github"];
+  };
 });
 
 /************************   Update  ************************/
@@ -215,7 +233,7 @@ $(document).on("click", "#edit-button", async function () {
     if (inputPw == memberData["pw"]) {
       let openWin = window.open(
         "newcard.html",
-        "updateCard",
+        "_blank",
         "width=520,height=670,left=200,top=100"
       );
       //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.

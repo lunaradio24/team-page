@@ -3,9 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>마리오</title>
+    <title id="memberTitle"></title>
+    <!-- CSS: style.css -->
+    <link href="style.css" rel="stylesheet" />
+    <!-- CSS: Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- JS: script.js -->
+    <script src="script.js" type="module"></script>
   </head>
-  <body>
-    안녕하세요, 마리오입니다.
+  <body class="memberBody">
+    <section id="about">
+      <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+              <div class="col-lg-6">
+                  <div class="about-text go-to">
+                      <div class="row about-list">
+                          <div class="col-md-6">
+                              <div class="media" id="memberName">
+                                  <label>이름</label>
+                                  <p></p>
+                              </div>
+                              <div class="media" id="memberMbti">
+                                  <label>Mbti</label>
+                                  <p></p>
+                              </div>
+                              <div class="media" id="memberStrength">
+                                  <label>장점</label>
+                                  <p></p>
+                              </div>
+                              <div class="media" id="memberCowork">
+                                  <label>협업 스타일</label>
+                                  <p></p>
+                              </div>
+                              <div class="media" id="memberFavorites">
+                                <label>좋아하는 것</label>
+                                <p></p>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6">
+                  <div class="about-avatar">
+                      <img class="memberImg" id="memberImg">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
   </body>
 </html>
