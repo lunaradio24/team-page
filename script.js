@@ -249,7 +249,7 @@ async function readDB() {
         </div>
       </section>
     </div>
-    `
+    `;
     //modalGroup 목록에 추가
     $("#modalGroup").append(member_html);
   });
@@ -300,9 +300,11 @@ $(document).on("click", "#edit-button", async function () {
         openWin.document.getElementById("mbti").value = memberData["mbti"];
         openWin.document.getElementById("blog").value = memberData["blog"];
         openWin.document.getElementById("github").value = memberData["github"];
-        openWin.document.getElementById("strength").value = memberData["strength"];
+        openWin.document.getElementById("strength").value =
+          memberData["strength"];
         openWin.document.getElementById("cowork").value = memberData["cowork"];
-        openWin.document.getElementById("favorites").value = memberData["favorites"];
+        openWin.document.getElementById("favorites").value =
+          memberData["favorites"];
         openWin.document.getElementById("password").value = memberData["pw"];
         openWin.document.getElementById("add-button").textContent = "확인";
         openWin.document.getElementById("add-button").value = docID;
