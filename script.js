@@ -383,6 +383,44 @@ $(document).on("click", "#delete-button", async function () {
   }
 });
 
+/************************   news Read  ************************/
+
+// 헤드라인 뉴스 가져오는 함수
+function fetchNews() {
+  $.ajax({
+    url: 'https://openapi.naver.com/v1/search/news.json',
+    headers: {
+      'X-Naver-Client-Id': 'Q71lVkadapcXpVueRPXu',
+      'X-Naver-Client-Secret': 'V_2imeX9Gc'
+    },
+    data: {
+      query: '속보', // 검색어를 '속보'로 지정하여 최신 속보를 가져옴
+      display: 5 // 가져올 뉴스 개수를 지정
+    },
+    method: 'GET',
+    success: function (response) {
+      const newsList = response.items;
+
+      // HTML에 추가
+      const newsListElement = $('#news-list');
+      newsListElement.empty(); // 기존 내용을 비움
+
+      $.each(newsList, function (index, news) {
+        const newsItem = $('<li>').addClass('news-item');
+        const newsTitle = $('<h3>').text(news.title);
+        const newsDescription = $('<p>').text(news.description);
+        const newsSource = $('<span>').text('Source: ' + news.originallink);
+
+        newsItem.append(newsTitle, newsDescription, newsSource);
+        newsListElement.append(newsItem);
+      });
+    },
+    error: function (xhr, status, error) {
+      console.error('Error fetching news:', error);
+    }
+  });
+}
+
 /************************   Initiate  ************************/
 function initPage() {
   //문서의 현재 상태가 로딩 중이 아니라면
@@ -406,3 +444,4 @@ function initPage() {
 }
 // initPage 함수를 사용해 웹페이지가 새로고침 되었을 때
 initPage();
+fetchNews();

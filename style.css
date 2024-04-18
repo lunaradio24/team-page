@@ -372,3 +372,14 @@ body > header {
 .media .txtarea {
   white-space: pre-wrap;
 }
+
+#news-list {
+  list-style-type: none;
+  padding: 0;
+}
+.news-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
