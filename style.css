@@ -63,7 +63,7 @@
   padding-bottom: 30px;
   color: rgba(245, 136, 46, 0.849);
 }
-.mytitle:hover {
+.mytitle > span:hover {
   cursor: pointer;
 }
 /************************   Body > Header   ************************/
@@ -73,6 +73,9 @@ body > header {
 .nav {
   gap: 80px;
   font-size: 14pt;
+}
+.nav-link:hover {
+  cursor: pointer;
 }
 /************************   Body > Main > team-content  ************************/
 .team-image {
