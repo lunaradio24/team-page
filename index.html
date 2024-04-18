@@ -31,35 +31,40 @@
       <h1 class="mytitle">밤양갱</h1>
     </div>
   </head>
-  <body>
+  <body style="background-color: black">
     <header class="d-flex justify-content-center py-3">
       <!-- navs & tabs -->
-      <div class="navs">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" id="team" href="#"
-              >Team</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="members" href="#">Members</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="join">Join</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="news" href="#">News</a>
-          </li>
-        </ul>
-      </div>
+      <ul class="nav">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            style="color: white"
+            aria-current="page"
+            id="team"
+            href="#"
+            >Team</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="members" style="color: white" href="#"
+            >Members</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: white" href="#" id="join">Join</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: white" id="news" href="#">News</a>
+        </li>
+      </ul>
     </header>
-    <div class="content" id="teamContent">
-      <!--사진+메시지박스추가-->
-      <div class="infoTeamWrap">
-        <div class="gatherImg">
-          <img src="./images/조사진.png" alt="게더타운 캡쳐" />
-        </div>
-        <div class="teamAndDonaBox">
+    <main>
+      <div class="content" id="teamContent">
+        <!--사진+메시지박스추가-->
+        <div class="infoTeamWrap">
+          <div class="gatherImg">
+            <img src="./images/조사진.png" alt="게더타운 캡쳐" />
+          </div>
           <div class="infoTeam">
             <div class="content1">
               <p class="intro">안녕하세요</p>
@@ -76,16 +81,15 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="content" id="membersContent">
-      <div class="row row-cols-1 row-cols-md-5 g-4" id="card"></div>
-    </div>
+      <div class="content" id="membersContent">
+        <div class="row row-cols-1 row-cols-md-5 g-4" id="card"></div>
+      </div>
 
-    <div class="content" id="newsContent">
-      <ul id="news-list"></ul>
-    </div>
+      <div class="content" id="newsContent">
+        <ul id="news-list"></ul>
+      </div>
 
-    <div id="modalGroup"></div>
+      <div id="modalGroup"></div>
+    </main>
   </body>
-  <template> </template>
 </html>

@@ -192,14 +192,14 @@ async function readDB() {
     //불러올 멤버카드 템플릿
     let card_html = `
           <div class="col-card">
-            <div class="card h-100">
+            <div class="card h-100" >
               <img
                 src="${image}"
                 class="card-img-top"
                 id="${doc.id}"
               />
-              <div class="card-footer">
-                <small class="text-body-secondary">${name}</small>
+              <div class="footer">
+                <small>${name}</small>
               </div>
             </div>
           </div>`;
@@ -213,53 +213,43 @@ async function readDB() {
     //불러올 멤버 정보 템플릿
     let member_html = `
     <div class="modal" id="${doc.id}Modal">
-      <section class="memberBody" id="about">
-        <div class="container">
-          <div class="row align-items-center flex-row-reverse">
-            <div class="col-lg-6">
-              <div class="about-text go-to">
-                <div class="row about-list">
-                  <div class="col-md-6">
-                    <div class="media">
-                      <label>이름</label>
-                      <p>${name}</p>
-                    </div>
-                    <div class="media">
-                      <label>Mbti</label>
-                      <p>${mbti}</p>
-                    </div>
-                    <div class="media txtarea">
-                      <label>장점</label>
-                      <p>${strengthStr}</p>
-                    </div>
-                    <div class="media txtarea">
-                      <label>협업 스타일</label>
-                      <p>${coworkStr}</p>
-                    </div>
-                    <div class="media txtarea">
-                      <label>좋아하는 것</label>
-                      <p>${favoritesStr}</p>
-                    </div>
-                  </div>
-                  <div class="memberEditButtons" id="${doc.id}">
-                    <button id="edit-button" class="btn btn-dark">수정</button>
-                    <button id="delete-button" class="btn btn-danger">삭제</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6" id="memberImgGroup">
-              <div class="about-avatar">
-                <img class="memberImg" src="${image}">
-                <div class="member-sns-icon-group">
-                  <button class="${github}" id="member-github-icon"></button>
-                  <button class="${blog}" id="member-blog-icon"></button>
-                </div>
-              </div>
+      <div class="modal-container">
+        <div class="col-left">
+          <div class="image-container">
+            <img src="${image}" />
+            <div class="image-footer member-sns-icon-group">
+              <button class="${github}" id="member-github-icon"></button>
+              <button class="${blog}" id="member-blog-icon"></button>
             </div>
           </div>
         </div>
-      </section>
+        <div class="col-right">
+          <div class="button-footer memberEditButtons" id="${doc.id}">
+            <button id="edit-button" class="btn btn-dark">✎</button>
+            <button id="delete-button" class="btn btn-danger">🗑️</button>
+          </div>
+          <div class="row-data">
+            <div class="row-left">이름</div>
+            <div class="row-right">${name}</div>
+          </div>
+          <div class="row-data">
+            <div class="row-left">MBTI</div>
+            <div class="row-right">${mbti}</div>
+          </div>
+          <div class="row-data">
+            <div class="row-left">장점</div>
+            <div class="row-right">${strengthStr}</div>
+          </div>
+          <div class="row-data">
+            <div class="row-left">협업 스타일</div>
+            <div class="row-right">${coworkStr}</div>
+          </div>
+          <div class="row-data">
+            <div class="row-left">좋아하는 것들</div>
+            <div class="row-right">${favoritesStr}</div>
+          </div>
+        </div>
+      </div>
     </div>
     `;
     //modalGroup 목록에 추가
@@ -399,42 +389,43 @@ $(document).on("click", "#delete-button", async function () {
 // 헤드라인 뉴스 가져오는 함수
 function fetchNews() {
   $.ajax({
-    url: 'https://cors-anywhere.herokuapp.com/https://openapi.naver.com/v1/search/news.json',
+    url: "https://cors-anywhere.herokuapp.com/https://openapi.naver.com/v1/search/news.json",
     headers: {
-      'X-Naver-Client-Id': 'jow8LlwZTVBX1mpePONJ',
-      'X-Naver-Client-Secret': 'uQU9cWqrBl'
+      "X-Naver-Client-Id": "jow8LlwZTVBX1mpePONJ",
+      "X-Naver-Client-Secret": "uQU9cWqrBl",
     },
     data: {
-      query: '속보', // 검색어를 '속보'로 지정하여 최신 속보를 가져옴
-      display: 5 // 가져올 뉴스 개수를 지정
+      query: "스파르타 코딩 클럽", // 검색어를 '속보'로 지정하여 최신 속보를 가져옴
+      display: 3, // 가져올 뉴스 개수를 지정
+      start: 1, // 검색 시작 위치 지정
     },
-    method: 'GET',
+    method: "GET",
     success: function (response) {
       const newsList = response.items;
 
       // HTML에 추가
-      const newsListElement = $('#news-list');
+      const newsListElement = $("#news-list");
       newsListElement.empty(); // 기존 내용을 비움
-
+      // let first_fullstop = news.description.find(".");
       $.each(newsList, function (index, news) {
         let new_temp = `
-        <li class="new-item" id="${news.originallink}">
-          <h3>${news.title}</h3>
-          <p>${news.description}</p>
+        <li class="news-item" id="${news.originallink}">
+          <h3 class="news-title">${news.title}</h3>
           <br>
+          <p class="news-text">${news.description.substring(0, 70)} ...</p>
         </li>
         `;
         newsListElement.append(new_temp);
       });
     },
     error: function (xhr, status, error) {
-      console.error('Error fetching news:', error);
-    }
+      console.error("Error fetching news:", error);
+    },
   });
 }
 
-$(document).on("click", ".new-item", (element) => {
-  window.location.href = $(element.currentTarget).attr('id');
+$(document).on("click", ".news-item", (element) => {
+  window.location.href = $(element.currentTarget).attr("id");
 });
 
 /************************   Initiate  ************************/
