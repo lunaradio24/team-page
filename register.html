@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>멤버 등록</title>
     <!-- CSS: style.css -->
     <link href="style.css" rel="stylesheet" />
     <!-- CSS: Bootstrap -->
@@ -19,13 +19,14 @@
     <script src="script.js" type="module"></script>
   </head>
   <body>
-    <div class="mynewcard">
+    <div class="register-form">
       <div class="form-floating mb-3">
         <div class="flex-container">
-          <div class="wrapper">
-            <img class="image-box" id="image-box" />
-            <label for="file" class="upload-btn">
-              <input id="file" type="file" accept="image/*" />
+          <div class="wrapper-image-upload">
+            <img id="image-box" />
+            <label for="upload-button" class="upload-btn">
+              <!-- file type의 input을 받습니다. image만 accept합니다. -->
+              <input id="upload-button" type="file" accept="image/*" />
               <span>Upload Image</span>
             </label>
           </div>
@@ -72,7 +73,6 @@
         ></textarea>
         <label for="floatingTextarea"></label>
       </div>
-
       <div class="form-floating mb-3">
         <input
           type="password"
@@ -85,7 +85,7 @@
       </div>
       <div class="buttons">
         <button type="button" class="btn btn-primary" id="add-button">
-          추가
+          등록
         </button>
         <button type="button" class="btn btn-outline-primary" id="close-button">
           닫기

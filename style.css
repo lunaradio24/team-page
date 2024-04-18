@@ -4,128 +4,7 @@
   font-style: normal;
 }
 
-.mytitle {
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-position: center;
-  background-size: contain;
-  margin-top: 0px;
-  padding-bottom: 30px;
-  color: rgba(245, 136, 46, 0.849);
-}
-.mytitle:hover {
-  cursor: pointer;
-}
-
-.nav {
-  gap: 80px;
-  font-size: 14pt;
-}
-
-#membersContent {
-  width: 1200px;
-  margin: 30px auto 0px auto;
-}
-
-.col-card {
-  width: 200px;
-  transition: all 0.2s linear;
-}
-
-.col-card:hover {
-  transform: scale(1.2);
-}
-.card-img-top {
-  height: 350px;
-  object-fit: cover;
-}
-.footer {
-  height: 40px;
-  /* background-color: black;
-  color: white; */
-  background-color: transparent;
-  color: black;
-  font-size: 12pt;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.content {
-  display: none;
-}
-
-.mynewcard {
-  width: 495px;
-  margin: 10px auto 0px auto;
-  padding: 10px;
-  box-shadow: 0px 0px 3px 0px blue;
-  border-radius: 5px;
-}
-
-.mynewcard .form-floating input::placeholder {
-  color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
-}
-.mynewcard .form-floating textarea::placeholder {
-  color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
-}
-.card-footer {
-  text-align: center;
-}
-
-#member-image {
-  height: 200px;
-  object-fit: contain;
-}
-
-.addImage {
-  width: 400px;
-  height: 300px;
-  background-color: lightgray;
-  border-radius: 20px 20px / 20px 20px;
-  overflow: hidden;
-  margin: 0px 10px 10px 0px;
-}
-
-.inputImg {
-  width: 450px;
-  height: 350px;
-}
-
-.flex-container {
-  display: flex;
-}
-
-.wrapper {
-  text-align: center;
-  flex-grow: 1;
-
-  .image-box {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    display: block;
-    margin: 20px auto;
-  }
-
-  .upload-btn {
-    border: 1px solid #ddd;
-    padding: 6px 12px;
-    display: inline-block;
-    cursor: pointer;
-
-    input[type="file"] {
-      display: none;
-    }
-  }
-}
-
-body > header {
-  background-color: rgb(78, 77, 77);
-}
-
+/************************   Head  ************************/
 .sns-icons {
   height: 30px;
   display: flex;
@@ -150,9 +29,8 @@ body > header {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: none;
-  background-color: white;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1920px-GitHub_Invertocat_Logo.svg.png");
+  border: 1pt solid white;
+  background-image: url("https://toppng.com/uploads/preview/github-logo-png-11659780076mpcdukkst7.png");
   background-size: contain;
 }
 #notion-icon {
@@ -161,7 +39,7 @@ body > header {
   border-radius: 50%;
   border: none;
   background-color: white;
-  background-image: url("https://seekicon.com/free-icon-download/notion_1.svg");
+  background-image: url("https://cdn.iconscout.com/icon/free/png-512/free-notion-2296040-1911999.png?f=webp&w=512");
   background-size: contain;
 }
 #google-icon {
@@ -173,150 +51,107 @@ body > header {
   background-image: url("https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png");
   background-size: contain;
 }
-#card {
+.mytitle {
+  height: 100px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-position: center;
+  background-size: contain;
+  margin-top: 0px;
+  padding-bottom: 30px;
+  color: rgba(245, 136, 46, 0.849);
 }
-.nav-link {
-  color: black;
+.mytitle:hover {
+  cursor: pointer;
 }
-
-.gatherImg {
+/************************   Body > Header   ************************/
+body > header {
+  background-color: rgb(78, 77, 77);
+}
+.nav {
+  gap: 80px;
+  font-size: 14pt;
+}
+/************************   Body > Main > team-content  ************************/
+.team-image {
   width: 50%;
   height: 85%;
   border-radius: 95px;
   margin: 70px 0px 50px 100px;
 }
-
-.gatherImg img {
+.team-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 95px;
   box-shadow: 5px 5px 10px;
 }
-
-.infoTeam {
+.team-info-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.team-info {
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: left;
   color: white;
-  /* background-color: green; */
   width: 50%;
   margin-left: 50px;
   padding-left: 100px;
 }
-
-.infoTeamWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.team-info-content {
+  padding: 5px 0px 0px 0px;
 }
-.memberBody {
-  color: #6f8ba4;
-  margin-top: 20px;
-}
-
-.section {
-  padding: 100px 0;
-  position: relative;
-}
-
-.intro {
+.team-introduce {
   font-weight: 900;
   font-size: 30px;
   margin-top: 20px;
 }
-.introContent {
+.team-introduce-content {
   font-size: 23px;
 }
-.content1 {
-  padding: 5px 0px 0px 0%;
-}
 
-.member-sns-icon-group {
-  position: absolute;
-  right: 200px;
-  bottom: -40px;
+/************************   Body > Main > members-content ************************/
+#members-content {
+  width: 1200px;
+  margin: 30px auto 0px auto;
 }
-
-#member-github-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  background-color: white;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1920px-GitHub_Invertocat_Logo.svg.png");
-  background-size: contain;
-}
-#member-blog-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  background-color: white;
-  background-image: url("https://w7.pngwing.com/pngs/254/281/png-transparent-social-media-blogger-computer-icons-logo-blog-text-logo-social-media.png");
-  background-size: contain;
-}
-
-/* 모달창에서 닫기 버튼 생성 필요 */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.media .txtarea {
-  white-space: pre-wrap;
-}
-
-#news-list {
-  list-style-type: none;
+#member-cards {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  padding: 0px;
-  gap: 10px;
 }
-.news-item {
-  width: 1000px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.col-card {
+  width: 200px;
+  transition: all 0.2s linear;
 }
-.news-item:hover {
-  cursor: pointer;
-  border: 1px solid rgba(245, 136, 46, 0.849);
-
-  .news-title {
-    color: rgba(245, 136, 46, 0.849);
-  }
-  .news-text {
-    color: white;
-  }
+.col-card:hover {
+  transform: scale(1.2);
 }
-
-.news-title {
-  color: white;
+.card-img-top {
+  height: 350px;
+  object-fit: cover;
 }
-.news-text {
-  color: grey;
+.card-footer {
+  height: 40px;
+  /* background-color: black;
+  color: white; */
+  background-color: transparent;
+  color: black;
+  font-size: 12pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-/* 모달 스타일 */
+.content {
+  display: none;
+}
+/************************   Body > Main > members-content > modal-window ************************/
 .modal {
   display: none;
   position: fixed;
@@ -328,13 +163,12 @@ body > header {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.7); /* 부모 화면 회색 처리 */
 }
-
 .modal-container {
   display: flex;
   justify-content: row;
   background-color: white;
   margin: 15% auto;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid black;
   border-radius: 5px;
   min-height: 350px;
@@ -362,7 +196,6 @@ body > header {
 .row-left {
   width: 30%;
   color: #6c757d;
-  /* background-color: aqua; */
 }
 .row-left-left {
   width: 20%;
@@ -375,7 +208,6 @@ body > header {
   width: 300px;
   height: 400px;
   position: relative;
-  /* background-color: aqua; */
 }
 .image-container img {
   width: 250px;
@@ -389,8 +221,110 @@ body > header {
   right: 0;
   bottom: 0;
 }
-.button-footer {
+#member-github-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: white;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/25/25231.png");
+  background-size: contain;
+}
+#member-blog-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: white;
+  background-image: url("https://w7.pngwing.com/pngs/254/281/png-transparent-social-media-blogger-computer-icons-logo-blog-text-logo-social-media.png");
+  background-size: contain;
+}
+.button-group {
   position: absolute;
   right: 0;
   top: 0;
+}
+#edit-button {
+  border-radius: 50%;
+}
+#delete-button {
+  border-radius: 50%;
+}
+#close-modal {
+  border-radius: 50%;
+}
+
+/************************   Body > Main > Join (newcard.html) ************************/
+.register-form {
+  width: 495px;
+  margin: 10px auto 0px auto;
+  padding: 10px;
+  box-shadow: 0px 0px 3px 0px blue;
+  border-radius: 5px;
+}
+.register-form .form-floating input::placeholder {
+  color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
+}
+.register-form .form-floating textarea::placeholder {
+  color: #6c757d; /* 기본 placeholder 텍스트의 색상 */
+}
+.flex-container {
+  display: flex;
+}
+.wrapper-image-upload {
+  text-align: center;
+  flex-grow: 1;
+
+  #image-box {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    margin: 20px auto;
+  }
+
+  .upload-btn {
+    border: 1px solid #cac8c8;
+    padding: 6px 12px;
+    display: inline-block;
+    cursor: pointer;
+
+    input[type="file"] {
+      display: none;
+    }
+  }
+}
+/************************   Body > Main > news-content ************************/
+#news-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0px;
+  gap: 10px;
+}
+.news-item {
+  width: 1000px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.news-item:hover {
+  cursor: pointer;
+  border: 1px solid rgba(245, 136, 46, 0.849);
+
+  .news-title {
+    color: rgba(245, 136, 46, 0.849);
+  }
+  .news-text {
+    color: white;
+  }
+}
+.news-title {
+  color: white;
+}
+.news-text {
+  color: grey;
 }

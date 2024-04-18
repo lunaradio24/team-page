@@ -33,65 +33,62 @@
   </head>
   <body style="background-color: black">
     <header class="d-flex justify-content-center py-3">
-      <!-- navs & tabs -->
       <ul class="nav">
         <li class="nav-item">
           <a
             class="nav-link active"
             style="color: white"
             aria-current="page"
-            id="team"
-            href="#"
-            >Team</a
+            id="home"
+            >Home</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="members" style="color: white" href="#"
-            >Members</a
-          >
+          <a class="nav-link" id="members" style="color: white">Members</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white" href="#" id="join">Join</a>
+          <a class="nav-link" style="color: white" id="join">Join Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white" id="news" href="#">News</a>
+          <a class="nav-link" style="color: white" id="news">News</a>
         </li>
       </ul>
     </header>
     <main>
-      <div class="content" id="teamContent">
-        <!--사진+메시지박스추가-->
-        <div class="infoTeamWrap">
-          <div class="gatherImg">
-            <img src="./images/조사진.png" alt="게더타운 캡쳐" />
+      <div class="content" id="home-content">
+        <div class="team-info-wrapper">
+          <div class="team-image">
+            <img src="./images/조사진.png" />
           </div>
-          <div class="infoTeam">
-            <div class="content1">
-              <p class="intro">안녕하세요</p>
-              <p class="introContent">🌰밤양갱조🌰 입니다!!</p>
+          <div class="team-info">
+            <div class="team-info-content">
+              <p class="team-introduce">안녕하세요</p>
+              <p class="team-introduce-content">🌰밤양갱조🌰 입니다!!</p>
             </div>
-            <div class="content1">
-              <p class="intro">저희는</p>
-              <p class="introContent">조용하고 어색하지만 열심히 합니다</p>
+            <div class="team-info-content">
+              <p class="team-introduce">저희는</p>
+              <p class="team-introduce-content">
+                조용하고 어색하지만 열심히 합니다
+              </p>
             </div>
-            <div class="content1">
-              <p class="intro">목표는</p>
-              <p class="introContent">
+            <div class="team-info-content">
+              <p class="team-introduce">목표는</p>
+              <p class="team-introduce-content">
                 재미와 취업 두 마리 토끼를 다 잡는 것입니다
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class="content" id="membersContent">
-        <div class="row row-cols-1 row-cols-md-5 g-4" id="card"></div>
+      <div class="content" id="members-content">
+        <div class="row row-cols-1 row-cols-md-5 g-4" id="member-cards"></div>
       </div>
 
-      <div class="content" id="newsContent">
+      <div class="content" id="news-content">
         <ul id="news-list"></ul>
       </div>
 
-      <div id="modalGroup"></div>
+      <div id="modal-group"></div>
     </main>
   </body>
 </html>

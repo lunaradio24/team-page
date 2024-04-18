@@ -50,41 +50,26 @@ $(document).on("click", "#member-blog-icon", (element) => {
   window.location.href = element.target.className;
 });
 
-/************************   NavBars  ************************/
+/************************   Nav Bars  ************************/
 // 메뉴 클릭했을 때 보여지는 컨텐츠 화면 전환하는 함수
 function tabContent(element) {
-  //클릭한 메뉴가 'Join' 이면
-  if (element.textContent == "Join") {
-    //모든 컨텐츠 숨기기
-    $(".content").hide();
-    //members 컴텐츠 보이기
-    $("#membersContent").show();
-  } else if (element.textContent == "News") {
+  //클릭한 메뉴가 'News' 면
+  if (element.id == "news") {
+    // fetchNews 함수를 실행하고, 다른 메뉴를 클릭했다면 실행하지 않음
     fetchNews();
-
-    //모든 컨텐츠 숨기기
-    $(".content").hide();
-    //클릭된 링크의 메뉴 id 가져오기
-    let menuID = element.id;
-    //보여줄 컨텐츠 id 구하기
-    let targetId = menuID + "Content";
-    //해당하는 컨텐츠 보이기
-    $("#" + targetId).show();
-  } else {
-    //클릭한 메뉴가 'Join'이 아니라면
-    //모든 컨텐츠 숨기기
-    $(".content").hide();
-    //클릭된 링크의 메뉴 id 가져오기
-    let menuID = element.id;
-    //보여줄 컨텐츠 id 구하기
-    let targetId = menuID + "Content";
-    //해당하는 컨텐츠 보이기
-    $("#" + targetId).show();
   }
+  //모든 컨텐츠 숨기기
+  $(".content").hide();
+  //클릭된 링크의 메뉴 id 가져오기
+  let menuID = element.id;
+  //보여줄 컨텐츠 id 구하기
+  let targetID = menuID + "-content";
+  //해당하는 컨텐츠 보이기
+  $("#" + targetID).show();
 }
 // 모든 메뉴 링크에 클릭 이벤트 추가
 $(document).on("click", ".nav-link", function (event) {
-  //클릭한 메뉴가 'Join'이 아니라면
+  //클릭한 메뉴가 'Join Us'가 아니라면
   if (this.id != "join") {
     //기본 동작 방지
     event.preventDefault();
@@ -97,23 +82,23 @@ $(document).on("click", ".nav-link", function (event) {
   }
 });
 $(document).on("click", ".mytitle", function () {
-  //로컬스토리지에 저장된 menukey 값을 "team"으로 초기화합니다.
-  localStorage.setItem("menukey", "team");
+  //로컬스토리지에 저장된 menukey 값을 "home"으로 초기화합니다.
+  localStorage.setItem("menukey", "home");
   //페이지를 새로고침 합니다.
   window.location.reload();
 });
 
-/************************   Create  ************************/
-// 메뉴에서 'Join' 클릭시
+/************************   Create   ************************/
+// 메뉴에서 'Join Us' 클릭시
 $(document).on("click", "#join", async function () {
   window.open(
-    "newcard.html",
-    "newCard",
+    "register.html",
+    "register",
     "width=520,height=670,left=200,top=100"
   );
 });
 
-let fileDOM = document.querySelector("#file");
+let fileDOM = document.querySelector("#upload-button");
 let preview = document.querySelector("#image-box");
 
 // 이미지 파일 업로드 함수
@@ -127,13 +112,14 @@ function getImage() {
   //업로드한 이미지 파일의 url을 읽습니다.
   reader.readAsDataURL(fileDOM.files[0]);
 }
-// 'Upload image' 버튼 클릭하여 새 파일을 선택하면
+
+// 팝업창 'Upload image' 버튼 클릭하여 새 파일을 선택하면
 fileDOM?.addEventListener("change", function () {
   //getImage 함수를 실행하여 선택한 이미지 파일의 데이터 url을 이미지 preview 요소의 src에 넣어줍니다.
   getImage();
 });
 
-// 팝업창 '추가' 버튼 클릭시
+// 팝업창 '등록' 버튼 클릭시
 $(document).on("click", "#add-button", async function () {
   //비밀번호 입력란에 입력한 글자가 4자리 숫자인 경우
   if (/^\d{4}$/.test($("#password").val())) {
@@ -171,7 +157,7 @@ $(document).on("click", "#close-button", async function () {
   self.close();
 });
 
-/************************   Read  ************************/
+/************************   Read   ************************/
 let docs = await getDocs(
   //시간순 정렬해서 query로 불러오기
   query(collection(db, "members"), orderBy("time"))
@@ -190,7 +176,7 @@ async function readDB() {
     let github = row["github"];
 
     //불러올 멤버카드 템플릿
-    let card_html = `
+    let card_template = `
           <div class="col-card">
             <div class="card h-100" >
               <img
@@ -198,35 +184,37 @@ async function readDB() {
                 class="card-img-top"
                 id="${doc.id}"
               />
-              <div class="footer">
+              <div class="card-footer">
                 <small>${name}</small>
               </div>
             </div>
           </div>`;
-    //카드 목록에 추가
-    $("#card").append(card_html);
+    //멤버카드 목록에 추가
+    $("#member-cards").append(card_template);
 
+    //textarea에서 입력받은 텍스트의 줄바꿈이 "\n" 으로 되어있는데, "<br>" 로 바꾸어야 html에서 적용이 된다.
     let strengthStr = strength.replace(/\n/g, "<br>");
     let coworkStr = cowork.replace(/\n/g, "<br>");
     let favoritesStr = favorites.replace(/\n/g, "<br>");
 
-    //불러올 멤버 정보 템플릿
-    let member_html = `
-    <div class="modal" id="${doc.id}Modal">
+    //불러올 멤버 프로필 템플릿
+    let profile_template = `
+    <div class="modal" id="${doc.id}-modal">
       <div class="modal-container">
         <div class="col-left">
           <div class="image-container">
             <img src="${image}" />
-            <div class="image-footer member-sns-icon-group">
+            <div class="image-footer">
               <button class="${github}" id="member-github-icon"></button>
               <button class="${blog}" id="member-blog-icon"></button>
             </div>
           </div>
         </div>
         <div class="col-right">
-          <div class="button-footer memberEditButtons" id="${doc.id}">
-            <button id="edit-button" class="btn btn-dark">✎</button>
-            <button id="delete-button" class="btn btn-danger">🗑️</button>
+          <div class="button-group" id="${doc.id}">
+            <button class="btn btn-primary" id="edit-button">✎</button>
+            <button class="btn btn-danger" id="delete-button">—</button>
+            <button class="btn btn-secondary" id="close-modal">✕</button>
           </div>
           <div class="row-data">
             <div class="row-left">이름</div>
@@ -252,37 +240,46 @@ async function readDB() {
       </div>
     </div>
     `;
-    //modalGroup 목록에 추가
-    $("#modalGroup").append(member_html);
+    //modal-group 목록에 추가
+    $("#modal-group").append(profile_template);
   });
 }
 
-// 이미지 클릭시 새창으로 개인 페이지 열기
+// 개인 이미지 클릭시
 $(document).on("click", ".card-img-top", async function () {
-  $("#" + this.id + "Modal").css("display", "block");
-  sessionStorage.setItem("modalID", "#" + this.id + "Modal");
+  //modal-group에 속한 개인 프로필 modal 창으로 열기
+  $("#" + this.id + "-modal").css("display", "block");
+  //세션스토리지의 modalID 라는 저장소를 생성하고 거기에 "#개인프로필id-modal" 이라는 값을 저장
+  sessionStorage.setItem("modalID", "#" + this.id + "-modal");
 });
 
-// 모달 닫기 버튼 및 모달 외부 클릭 시 이벤트 처리
-$(".close").click(function () {
-  $(sessionStorage.getItem("modalID")).css("display", "none");
+// modal 창의 닫기 버튼 클릭시
+$(document).on("click", "#close-modal", function () {
+  //modal-group에 속한 개인 프로필 modal 창 닫기
+  $("#" + this.parentElement.id + "-modal").css("display", "none");
+  //세션스토리지에서 modalID 저장소를 삭제
   sessionStorage.removeItem("modalID");
 });
 
+// modal 창의 외부 클릭 시
 $(window).click(function (event) {
+  //클릭한 곳의 element가 현재 세션스토리지의 modalID 라는 저장소에서 가져온 id에 해당되는 element와 같다면
   if (event.target == $(sessionStorage.getItem("modalID"))[0]) {
+    //세션스토리지의 modalID 라는 저장소에서 가져온 id에 해당되는 프로필 modal 창을 닫음
     $(sessionStorage.getItem("modalID")).css("display", "none");
+    //세션스토리지에서 modalID 저장소를 삭제
     sessionStorage.removeItem("modalID");
   }
 });
 
-/************************   Update  ************************/
+/************************   Update   ************************/
 // '수정' 버튼 클릭시
 $(document).on("click", "#edit-button", async function () {
   //편집할 것인지 확인하는 confirm 창을 띄운다.
   const isEdit = window.confirm("편집하시겠습니까?");
+  //'Okay'를 클릭하면 아래를 실행, 'Cancel'을 클릭하면 취소
   if (isEdit) {
-    //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
+    //클릭된 버튼의 부모 요소에서 멤버의 doc ID를 가져옵니다.
     let docID = this.parentElement.id;
     //Firestore에서 해당 멤버의 데이터를 가져옵니다.
     let memberDoc = await getDoc(doc(db, "members", docID));
@@ -294,7 +291,7 @@ $(document).on("click", "#edit-button", async function () {
       //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는 경우
       if (inputPw == memberData["pw"]) {
         let openWin = window.open(
-          "newcard.html",
+          "register.html",
           "_blank",
           "width=520,height=670,left=200,top=100"
         );
@@ -360,13 +357,13 @@ $(document).on("click", "#confirm-button", async function () {
   }
 });
 
-/************************   Delete  ************************/
+/************************   Delete   ************************/
 // '삭제' 버튼 클릭시
 $(document).on("click", "#delete-button", async function () {
   //삭제할 것인지 확인하는 confirm 창을 띄운다.
   const isDelete = window.confirm("삭제하시겠습니까?");
   if (isDelete) {
-    //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
+    //클릭된 버튼의 부모 요소에서 멤버의 doc ID를 가져옵니다.
     let docID = this.parentElement.id;
     //Firestore에서 해당 멤버의 데이터를 가져옵니다.
     let memberDoc = await getDoc(doc(db, "members", docID));
@@ -395,7 +392,7 @@ $(document).on("click", "#delete-button", async function () {
   }
 });
 
-/************************   news Read  ************************/
+/************************   News Read   ************************/
 
 // 헤드라인 뉴스 가져오는 함수
 function fetchNews() {
@@ -435,11 +432,13 @@ function fetchNews() {
   });
 }
 
+//뉴스 기사를 클릭하면
 $(document).on("click", ".news-item", (element) => {
+  //해당 기사 링크로 이동
   window.location.href = $(element.currentTarget).attr("id");
 });
 
-/************************   Initiate  ************************/
+/************************   Initiate   ************************/
 function initPage() {
   //문서의 현재 상태가 로딩 중이 아니라면
   if (document.readyState !== "loading") {
