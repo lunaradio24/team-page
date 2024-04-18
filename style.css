@@ -297,6 +297,18 @@ body > header {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.news-item:hover {
+  cursor: pointer;
+  border: 1px solid rgba(245, 136, 46, 0.849);
+
+  .news-title {
+    color: rgba(245, 136, 46, 0.849);
+  }
+  .news-text {
+    color: white;
+  }
+}
+
 .news-title {
   color: white;
 }
