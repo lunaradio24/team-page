@@ -401,8 +401,8 @@ function fetchNews() {
   $.ajax({
     url: 'https://cors-anywhere.herokuapp.com/https://openapi.naver.com/v1/search/news.json',
     headers: {
-      'X-Naver-Client-Id': 'Q71lVkadapcXpVueRPXu',
-      'X-Naver-Client-Secret': 'V_2imeX9Gc'
+      'X-Naver-Client-Id': 'jow8LlwZTVBX1mpePONJ',
+      'X-Naver-Client-Secret': 'uQU9cWqrBl'
     },
     data: {
       query: '속보', // 검색어를 '속보'로 지정하여 최신 속보를 가져옴
@@ -418,7 +418,7 @@ function fetchNews() {
 
       $.each(newsList, function (index, news) {
         let new_temp = `
-        <li id="new-item" class="${news.originallink}">
+        <li class="new-item" id="${news.originallink}">
           <h3>${news.title}</h3>
           <p>${news.description}</p>
           <br>
@@ -433,8 +433,8 @@ function fetchNews() {
   });
 }
 
-$(document).on("click", "#new-item", (element) => {
-  window.location.href = element.target.className;
+$(document).on("click", ".new-item", (element) => {
+  window.location.href = $(element.currentTarget).attr('id');
 });
 
 /************************   Initiate  ************************/
