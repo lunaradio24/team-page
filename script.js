@@ -59,6 +59,17 @@ function tabContent(element) {
     $(".content").hide();
     //members 컴텐츠 보이기
     $("#membersContent").show();
+  } else if (element.textContent == "News") {
+    fetchNews();
+
+    //모든 컨텐츠 숨기기
+    $(".content").hide();
+    //클릭된 링크의 메뉴 id 가져오기
+    let menuID = element.id;
+    //보여줄 컨텐츠 id 구하기
+    let targetId = menuID + "Content";
+    //해당하는 컨텐츠 보이기
+    $("#" + targetId).show();
   } else {
     //클릭한 메뉴가 'Join'이 아니라면
     //모든 컨텐츠 숨기기
@@ -388,7 +399,7 @@ $(document).on("click", "#delete-button", async function () {
 // 헤드라인 뉴스 가져오는 함수
 function fetchNews() {
   $.ajax({
-    url: 'https://openapi.naver.com/v1/search/news.json',
+    url: 'https://cors-anywhere.herokuapp.com/https://openapi.naver.com/v1/search/news.json',
     headers: {
       'X-Naver-Client-Id': 'Q71lVkadapcXpVueRPXu',
       'X-Naver-Client-Secret': 'V_2imeX9Gc'
@@ -406,13 +417,14 @@ function fetchNews() {
       newsListElement.empty(); // 기존 내용을 비움
 
       $.each(newsList, function (index, news) {
-        const newsItem = $('<li>').addClass('news-item');
-        const newsTitle = $('<h3>').text(news.title);
-        const newsDescription = $('<p>').text(news.description);
-        const newsSource = $('<span>').text('Source: ' + news.originallink);
-
-        newsItem.append(newsTitle, newsDescription, newsSource);
-        newsListElement.append(newsItem);
+        let new_temp = `
+        <li id="new-item" class="${news.originallink}">
+          <h3>${news.title}</h3>
+          <p>${news.description}</p>
+          <br>
+        </li>
+        `;
+        newsListElement.append(new_temp);
       });
     },
     error: function (xhr, status, error) {
@@ -420,6 +432,10 @@ function fetchNews() {
     }
   });
 }
+
+$(document).on("click", "#new-item", (element) => {
+  window.location.href = element.target.className;
+});
 
 /************************   Initiate  ************************/
 function initPage() {
@@ -444,4 +460,3 @@ function initPage() {
 }
 // initPage 함수를 사용해 웹페이지가 새로고침 되었을 때
 initPage();
-fetchNews();
