@@ -279,48 +279,55 @@ $(window).click(function (event) {
 /************************   Update  ************************/
 // '수정' 버튼 클릭시
 $(document).on("click", "#edit-button", async function () {
-  //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
-  let docID = this.parentElement.id;
-  //Firestore에서 해당 멤버의 데이터를 가져옵니다.
-  let memberDoc = await getDoc(doc(db, "members", docID));
-  let memberData = memberDoc.data();
-  //비밀번호 확인 프롬프트 창을 엽니다.
-  let inputPw = window.prompt("비밀번호를 입력해주세요.", "숫자 4자리");
-  //프롬프트에 입력한 글자가 4자리 숫자인 경우
-  if (/^\d{4}$/.test(inputPw)) {
-    //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는 경우
-    if (inputPw == memberData["pw"]) {
-      let openWin = window.open(
-        "newcard.html",
-        "_blank",
-        "width=520,height=670,left=200,top=100"
-      );
-      //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.
-      openWin.onload = function () {
-        openWin.document.getElementById("image-box").src = memberData["image"];
-        openWin.document.getElementById("name").value = memberData["name"];
-        openWin.document.getElementById("mbti").value = memberData["mbti"];
-        openWin.document.getElementById("blog").value = memberData["blog"];
-        openWin.document.getElementById("github").value = memberData["github"];
-        openWin.document.getElementById("strength").value =
-          memberData["strength"];
-        openWin.document.getElementById("cowork").value = memberData["cowork"];
-        openWin.document.getElementById("favorites").value =
-          memberData["favorites"];
-        openWin.document.getElementById("password").value = memberData["pw"];
-        openWin.document.getElementById("add-button").textContent = "확인";
-        openWin.document.getElementById("add-button").value = docID;
-        openWin.document.getElementById("add-button").id = "confirm-button";
-      };
+  //편집할 것인지 확인하는 confirm 창을 띄운다.
+  const isEdit = window.confirm("편집하시겠습니까?");
+  if (isEdit) {
+    //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
+    let docID = this.parentElement.id;
+    //Firestore에서 해당 멤버의 데이터를 가져옵니다.
+    let memberDoc = await getDoc(doc(db, "members", docID));
+    let memberData = memberDoc.data();
+    //비밀번호 확인 프롬프트 창을 엽니다.
+    let inputPw = window.prompt("비밀번호를 입력해주세요.", "숫자 4자리");
+    //프롬프트에 입력한 글자가 4자리 숫자인 경우
+    if (/^\d{4}$/.test(inputPw)) {
+      //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는 경우
+      if (inputPw == memberData["pw"]) {
+        let openWin = window.open(
+          "newcard.html",
+          "_blank",
+          "width=520,height=670,left=200,top=100"
+        );
+        //새 창을 열고 수정 전 데이터를 입력창에 표시합니다.
+        openWin.onload = function () {
+          openWin.document.getElementById("image-box").src =
+            memberData["image"];
+          openWin.document.getElementById("name").value = memberData["name"];
+          openWin.document.getElementById("mbti").value = memberData["mbti"];
+          openWin.document.getElementById("blog").value = memberData["blog"];
+          openWin.document.getElementById("github").value =
+            memberData["github"];
+          openWin.document.getElementById("strength").value =
+            memberData["strength"];
+          openWin.document.getElementById("cowork").value =
+            memberData["cowork"];
+          openWin.document.getElementById("favorites").value =
+            memberData["favorites"];
+          openWin.document.getElementById("password").value = memberData["pw"];
+          openWin.document.getElementById("add-button").textContent = "확인";
+          openWin.document.getElementById("add-button").value = docID;
+          openWin.document.getElementById("add-button").id = "confirm-button";
+        };
+      } else {
+        //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는지 않는 경우
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    } else if (inputPw == null) {
+      //프롬프트 취소했을 경우
     } else {
-      //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는지 않는 경우
-      alert("비밀번호가 일치하지 않습니다.");
+      //프롬프트에 입력한 글자가 4자리 숫자가 아닌 경우
+      alert("4자리 숫자로 입력해주세요.");
     }
-  } else if (inputPw == null) {
-    //프롬프트 취소했을 경우
-  } else {
-    //프롬프트에 입력한 글자가 4자리 숫자가 아닌 경우
-    alert("4자리 숫자로 입력해주세요.");
   }
 });
 
@@ -356,31 +363,35 @@ $(document).on("click", "#confirm-button", async function () {
 /************************   Delete  ************************/
 // '삭제' 버튼 클릭시
 $(document).on("click", "#delete-button", async function () {
-  //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
-  let docID = this.parentElement.id;
-  //Firestore에서 해당 멤버의 데이터를 가져옵니다.
-  let memberDoc = await getDoc(doc(db, "members", docID));
-  let memberData = memberDoc.data();
-  //비밀번호 확인 프롬프트 창을 엽니다.
-  let inputPw = window.prompt("비밀번호를 입력해주세요.", "숫자 4자리");
-  //프롬프트에 입력한 글자가 4자리 숫자인 경우
-  if (/^\d{4}$/.test(inputPw)) {
-    //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는 경우
-    if (inputPw == memberData["pw"]) {
-      // Firestore에서 해당 멤버의 데이터를 삭제합니다.
-      await deleteDoc(doc(db, "members", docID));
-      alert("삭제되었습니다.");
-      //메인 창을 새로고침 합니다.
-      window.location.reload();
+  //삭제할 것인지 확인하는 confirm 창을 띄운다.
+  const isDelete = window.confirm("삭제하시겠습니까?");
+  if (isDelete) {
+    //클릭된 버튼의 부모 요소, 즉 div class="memberEditButtons"에서 멤버의 ID를 가져옵니다.
+    let docID = this.parentElement.id;
+    //Firestore에서 해당 멤버의 데이터를 가져옵니다.
+    let memberDoc = await getDoc(doc(db, "members", docID));
+    let memberData = memberDoc.data();
+    //비밀번호 확인 프롬프트 창을 엽니다.
+    let inputPw = window.prompt("비밀번호를 입력해주세요.", "숫자 4자리");
+    //프롬프트에 입력한 글자가 4자리 숫자인 경우
+    if (/^\d{4}$/.test(inputPw)) {
+      //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는 경우
+      if (inputPw == memberData["pw"]) {
+        // Firestore에서 해당 멤버의 데이터를 삭제합니다.
+        await deleteDoc(doc(db, "members", docID));
+        alert("삭제되었습니다.");
+        //메인 창을 새로고침 합니다.
+        window.location.reload();
+      } else {
+        //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는지 않는 경우
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    } else if (inputPw == null) {
+      //프롬프트 취소했을 경우
     } else {
-      //프롬프트에 입력한 4자리 숫자가 비밀번호와 일치하는지 않는 경우
-      alert("비밀번호가 일치하지 않습니다.");
+      //프롬프트에 입력한 글자가 4자리 숫자가 아닌 경우
+      alert("4자리 숫자로 입력해주세요.");
     }
-  } else if (inputPw == null) {
-    //프롬프트 취소했을 경우
-  } else {
-    //프롬프트에 입력한 글자가 4자리 숫자가 아닌 경우
-    alert("4자리 숫자로 입력해주세요.");
   }
 });
 
