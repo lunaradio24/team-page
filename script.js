@@ -81,7 +81,7 @@ $(document).on("click", ".nav-link", function (event) {
     //do nothing
   }
 });
-$(document).on("click", ".mytitle", function () {
+$(document).on("click", ".title-bam", function () {
   //로컬스토리지에 저장된 menukey 값을 "home"으로 초기화합니다.
   localStorage.setItem("menukey", "home");
   //페이지를 새로고침 합니다.
